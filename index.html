@@ -1,0 +1,1134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NATGRID Gandiva Investigation Guide — AP Police</title>
+<style>
+:root {
+  --blue-50:#E6F1FB;--blue-100:#B5D4F4;--blue-200:#85B7EB;
+  --blue-400:#378ADD;--blue-600:#185FA5;--blue-800:#0C447C;--blue-900:#042C53;
+  --teal-50:#E1F5EE;--teal-100:#9FE1CB;--teal-600:#0F6E56;--teal-800:#085041;
+  --amber-50:#FAEEDA;--amber-100:#FAC775;--amber-400:#EF9F27;
+  --amber-600:#854F0B;--amber-800:#633806;--amber-900:#412402;
+  --green-50:#EAF3DE;--green-600:#3B6D11;--green-800:#27500A;
+  --red-50:#FCEBEB;--red-600:#A32D2D;--red-800:#791F1F;
+  --gray-50:#F1EFE8;--gray-100:#D3D1C7;--gray-600:#5F5E5A;--gray-900:#2C2C2A;
+  --bg:#f5f4f0;--surface:#ffffff;
+  --border:rgba(0,0,0,0.1);--border-strong:rgba(0,0,0,0.18);
+  --text:#1a1a18;--text-muted:#5f5e5a;--text-hint:#888780;
+}
+@media (prefers-color-scheme:dark){:root{
+  --bg:#181816;--surface:#222220;--border:rgba(255,255,255,0.1);--border-strong:rgba(255,255,255,0.18);
+  --text:#e8e6e0;--text-muted:#a8a69e;--text-hint:#6e6c66;
+  --blue-50:#0c2a48;--blue-100:#163d62;--blue-200:#1e5280;--blue-800:#85B7EB;--blue-900:#B5D4F4;
+  --teal-50:#062a1e;--teal-100:#0a3d2b;--teal-800:#5DCAA5;
+  --amber-50:#2e1e06;--amber-100:#3d280a;--amber-800:#EF9F27;--amber-900:#FAC775;
+  --green-50:#0e2106;--green-800:#97C459;
+  --red-50:#2e0a0a;--red-800:#F09595;
+  --gray-50:#26241e;--gray-100:#2e2c26;
+}}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Georgia',serif;background:var(--bg);color:var(--text);min-height:100vh;font-size:15px;line-height:1.6}
+
+/* ── HEADER ── */
+.header{background:var(--blue-900);color:#fff;padding:0}
+.header-top{display:flex;align-items:center;justify-content:space-between;padding:14px 24px;border-bottom:1px solid rgba(255,255,255,0.12)}
+.header-logo{display:flex;align-items:center;gap:14px}
+.logo-emblem{width:52px;height:52px;background:rgba(255,255,255,0.12);border-radius:50%;border:2px solid rgba(255,255,255,0.3);display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:800;color:#fff;font-family:Arial,sans-serif;letter-spacing:-1px}
+.logo-text .dept{font-size:12px;font-weight:400;opacity:0.7;letter-spacing:0.5px;font-family:Arial,sans-serif}
+.logo-text .ltitle{font-size:18px;font-weight:700;letter-spacing:0.3px;font-family:Arial,sans-serif}
+.restricted-badge{background:rgba(200,40,40,0.85);color:#fff;font-family:Arial,sans-serif;font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;padding:4px 12px;border-radius:4px}
+.header-sub{display:flex;align-items:center;gap:10px;padding:8px 24px;background:rgba(0,0,0,0.25);font-family:Arial,sans-serif;font-size:11px;letter-spacing:0.5px;opacity:0.75;flex-wrap:wrap}
+.header-sub .dot{width:3px;height:3px;background:rgba(255,255,255,0.4);border-radius:50%}
+
+/* ── TABS ── */
+.tabs-bar{background:var(--blue-800);display:flex;gap:0;border-bottom:none;overflow-x:auto}
+.tab-btn{font-family:Arial,sans-serif;font-size:13px;font-weight:600;color:rgba(255,255,255,0.65);padding:11px 22px;cursor:pointer;border:none;background:transparent;white-space:nowrap;border-bottom:3px solid transparent;transition:all .2s;letter-spacing:0.3px}
+.tab-btn:hover{color:#fff;background:rgba(255,255,255,0.08)}
+.tab-btn.active{color:#fff;border-bottom:3px solid var(--amber-400);background:rgba(255,255,255,0.06)}
+.tab-panel{display:none}.tab-panel.active{display:block}
+
+/* ── CONTAINER ── */
+.container{max-width:1100px;margin:0 auto;padding:24px 20px 48px}
+
+/* ── INTRO CARD ── */
+.intro-card{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:20px 24px;display:flex;align-items:flex-start;gap:18px;margin-bottom:20px;box-shadow:0 1px 4px rgba(0,0,0,0.06)}
+.intro-icon{font-size:32px;line-height:1;flex-shrink:0;margin-top:2px}
+.intro-card h1{font-size:20px;font-weight:700;margin-bottom:5px;font-family:Arial,sans-serif}
+.intro-card p{font-size:13.5px;color:var(--text-muted);font-family:Arial,sans-serif;line-height:1.6}
+
+/* ── INPUT GRID ── */
+.input-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px}
+.input-panel{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:16px 18px;box-shadow:0 1px 3px rgba(0,0,0,0.05)}
+.input-panel.wide{grid-column:1/-1}
+.panel-label{font-family:Arial,sans-serif;font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--text-hint);margin-bottom:12px}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{font-family:Arial,sans-serif;font-size:12.5px;font-weight:500;padding:6px 13px;border-radius:20px;background:var(--gray-50);border:1.5px solid var(--border-strong);cursor:pointer;color:var(--text-muted);transition:all .18s;user-select:none}
+.chip:hover{background:var(--blue-50);border-color:var(--blue-400);color:var(--blue-800)}
+.chip.on{border-width:2px}
+.chip.on.c-blue{background:var(--blue-50);border-color:var(--blue-400);color:var(--blue-800)}
+.chip.on.c-teal{background:var(--teal-50);border-color:var(--teal-600);color:var(--teal-800)}
+.chip.on.c-amber{background:var(--amber-50);border-color:var(--amber-400);color:var(--amber-800)}
+.chip.on.c-green{background:var(--green-50);border-color:var(--green-600);color:var(--green-800)}
+.chip.on.c-red{background:var(--red-50);border-color:var(--red-600);color:var(--red-800)}
+
+/* ── CASE ID INPUT ── */
+.case-id-wrap{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:14px 18px;margin-bottom:16px;display:flex;align-items:center;gap:14px;box-shadow:0 1px 3px rgba(0,0,0,0.05)}
+.case-id-label{font-family:Arial,sans-serif;font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--text-hint);white-space:nowrap}
+.case-id-input{flex:1;font-family:Arial,sans-serif;font-size:14px;font-weight:600;padding:7px 14px;border:1.5px solid var(--border-strong);border-radius:6px;background:var(--bg);color:var(--text);max-width:260px;letter-spacing:1px}
+.case-id-input:focus{outline:none;border-color:var(--blue-400);background:var(--blue-50)}
+.case-id-hint{font-family:Arial,sans-serif;font-size:12px;color:var(--text-hint)}
+
+/* ── GENERATE ── */
+.generate-wrap{display:flex;gap:10px;margin-bottom:24px;align-items:center;flex-wrap:wrap}
+.generate-btn{font-family:Arial,sans-serif;font-size:14px;font-weight:700;padding:11px 26px;background:var(--blue-600);color:#fff;border:none;border-radius:7px;cursor:pointer;transition:background .15s;letter-spacing:0.3px}
+.generate-btn:hover{background:var(--blue-800)}
+.reset-btn{font-family:Arial,sans-serif;font-size:13px;font-weight:600;padding:11px 18px;background:transparent;color:var(--text-muted);border:1.5px solid var(--border-strong);border-radius:7px;cursor:pointer;transition:all .15s}
+.reset-btn:hover{background:var(--gray-50);color:var(--text)}
+.print-btn{font-family:Arial,sans-serif;font-size:13px;font-weight:600;padding:11px 18px;background:transparent;color:var(--text-muted);border:1.5px solid var(--border-strong);border-radius:7px;cursor:pointer;transition:all .15s;margin-left:auto}
+.print-btn:hover{background:var(--gray-50);color:var(--text)}
+
+/* ── LAYOUT ── */
+.layout{display:grid;grid-template-columns:1fr 300px;gap:20px;align-items:start}
+.side-col{position:sticky;top:16px}
+
+/* ── CATEGORY HEADER ── */
+.cat-header{border-radius:10px;padding:18px 22px;display:flex;align-items:center;gap:16px;margin-bottom:18px;border:1.5px solid transparent}
+.cat-header.A{background:var(--blue-50);border-color:var(--blue-200)}
+.cat-header.B{background:var(--teal-50);border-color:var(--teal-100)}
+.cat-header.C{background:var(--amber-50);border-color:var(--amber-100)}
+.cat-icon{font-size:34px;flex-shrink:0}
+.cat-badge{font-family:Arial,sans-serif;font-size:10px;font-weight:800;letter-spacing:2px;text-transform:uppercase;padding:3px 10px;border-radius:20px;display:inline-block;margin-bottom:5px}
+.badge-A{background:var(--blue-800);color:#fff}
+.badge-B{background:var(--teal-800);color:#fff}
+.badge-C{background:var(--amber-800);color:#fff}
+.cat-title{font-size:18px;font-weight:700;font-family:Arial,sans-serif}
+.cat-desc{font-size:13px;color:var(--text-muted);font-family:Arial,sans-serif;margin-top:3px}
+
+/* ── STEP CARDS ── */
+.step-card{background:var(--surface);border:1px solid var(--border);border-radius:9px;margin-bottom:10px;overflow:hidden;box-shadow:0 1px 3px rgba(0,0,0,0.05)}
+.step-card-header{display:flex;align-items:center;gap:12px;padding:13px 16px;cursor:pointer;user-select:none;transition:background .15s}
+.step-card-header:hover{background:var(--gray-50)}
+.step-num{width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:Arial,sans-serif;font-size:13px;font-weight:700;flex-shrink:0}
+.num-A{background:var(--blue-100);color:var(--blue-900)}
+.num-B{background:var(--teal-100);color:var(--teal-800)}
+.num-C{background:var(--amber-100);color:var(--amber-900)}
+.step-title-text{font-family:Arial,sans-serif;font-size:14px;font-weight:600;flex:1}
+.step-modules{display:flex;flex-wrap:wrap;gap:5px}
+.chevron{font-size:14px;color:var(--text-hint);transition:transform .2s;flex-shrink:0}
+.chevron.open{transform:rotate(180deg)}
+.step-body{display:none;padding:14px 18px 16px 18px;font-family:Arial,sans-serif;font-size:13.5px;line-height:1.65;border-top:1px solid var(--border)}
+.step-body.open{display:block}
+.step-body ul{padding-left:18px;margin-top:6px}
+.step-body li{margin-bottom:5px}
+.step-body strong{font-weight:700}
+.step-body br+br{display:none}
+
+/* ── MODULE TAGS ── */
+.mod-tag{font-family:Arial,sans-serif;font-size:11px;font-weight:700;padding:3px 8px;border-radius:4px;letter-spacing:0.3px}
+.mod-blue{background:var(--blue-100);color:var(--blue-800)}
+.mod-teal{background:var(--teal-100);color:var(--teal-800)}
+.mod-amber{background:var(--amber-100);color:var(--amber-800)}
+.mod-green{background:var(--green-50);color:var(--green-800)}
+.mod-red{background:var(--red-50);color:var(--red-800)}
+
+/* ── TIPS ── */
+.tip{margin-top:10px;padding:9px 12px;border-radius:6px;background:var(--blue-50);border-left:3px solid var(--blue-400);font-size:13px;font-family:Arial,sans-serif;line-height:1.55}
+.tip.warn{background:var(--red-50);border-left-color:var(--red-600)}
+.tip.priority{background:var(--amber-50);border-left-color:var(--amber-400)}
+.tip.success{background:var(--green-50);border-left-color:var(--green-600)}
+
+/* ── GOLDEN RULE ── */
+.golden-rule{background:var(--blue-900);color:#fff;border-radius:10px;padding:18px 22px;margin-top:18px}
+.gr-title{font-size:11px;letter-spacing:1.5px;text-transform:uppercase;font-weight:700;opacity:0.6;margin-bottom:8px;font-family:Arial,sans-serif}
+.gr-formula{font-size:16px;font-weight:700;margin-bottom:6px;font-family:Arial,sans-serif}
+.gr-formula span{opacity:0.5;margin:0 8px}
+.gr-warn{font-size:12.5px;color:#ffb3b3;margin-top:8px;font-weight:600;font-family:Arial,sans-serif}
+.gr-steps{font-size:12px;opacity:0.6;margin-top:4px;font-family:Arial,sans-serif}
+
+/* ── PROGRESS BAR ── */
+.progress-bar{display:flex;align-items:center;gap:5px;margin-bottom:14px;flex-wrap:wrap}
+.prog-pip{width:9px;height:9px;border-radius:50%;background:var(--border-strong);flex-shrink:0}
+.prog-pip.A{background:var(--blue-400)}
+.prog-pip.B{background:var(--teal-600)}
+.prog-pip.C{background:var(--amber-400)}
+.prog-label{font-family:Arial,sans-serif;font-size:11px;color:var(--text-hint);margin-left:4px}
+
+/* ── SIDE PANEL ── */
+.case-summary{background:var(--surface);border:1px solid var(--border);border-radius:9px;padding:16px;box-shadow:0 1px 3px rgba(0,0,0,0.05)}
+.case-summary h3{font-family:Arial,sans-serif;font-size:12px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--text-hint);margin-bottom:12px}
+.cs-row{display:flex;gap:8px;margin-bottom:8px;align-items:flex-start;font-family:Arial,sans-serif;font-size:13px}
+.cs-key{font-weight:700;color:var(--text-muted);min-width:64px;font-size:12px;padding-top:1px}
+.cs-val{color:var(--text);text-transform:capitalize}
+.cs-tags{display:flex;flex-wrap:wrap;gap:5px;margin-top:4px}
+.cs-tag{font-family:Arial,sans-serif;font-size:11px;font-weight:600;padding:3px 8px;border-radius:12px;background:var(--blue-50);color:var(--blue-800)}
+
+/* ── QUICK REF TABLE ── */
+.qref-table{width:100%;border-collapse:collapse;font-family:Arial,sans-serif;font-size:13.5px;background:var(--surface);border-radius:10px;overflow:hidden;box-shadow:0 1px 4px rgba(0,0,0,0.07)}
+.qref-table th{background:var(--blue-900);color:#fff;padding:11px 14px;font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;text-align:left}
+.qref-table td{padding:11px 14px;border-bottom:1px solid var(--border);vertical-align:top;line-height:1.5}
+.qref-table tr:last-child td{border-bottom:none}
+.qref-table tr:hover td{background:var(--gray-50)}
+.qref-table td:first-child{font-weight:700;color:var(--blue-800);white-space:nowrap;font-size:13px}
+.qref-category-A td:first-child{color:var(--blue-800)}
+.qref-category-B td:first-child{color:var(--teal-800)}
+.qref-category-C td:first-child{color:var(--amber-800)}
+.qref-badge{display:inline-block;font-size:10px;font-weight:800;letter-spacing:1.5px;padding:2px 7px;border-radius:3px;margin-left:6px;vertical-align:middle}
+.badge-a-sm{background:var(--blue-800);color:#fff}
+.badge-b-sm{background:var(--teal-800);color:#fff}
+.badge-c-sm{background:var(--amber-800);color:#fff}
+.section-title{font-family:Arial,sans-serif;font-size:18px;font-weight:700;margin:28px 0 14px;padding-bottom:8px;border-bottom:2px solid var(--border-strong);color:var(--text)}
+.section-sub{font-family:Arial,sans-serif;font-size:13px;color:var(--text-muted);margin-bottom:18px;line-height:1.6}
+
+/* ── REAL CASES ── */
+.cases-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(330px,1fr));gap:16px;margin-bottom:28px}
+.case-card{background:var(--surface);border:1px solid var(--border);border-radius:9px;padding:16px 18px;box-shadow:0 1px 3px rgba(0,0,0,0.05)}
+.case-card-header{display:flex;align-items:flex-start;justify-content:space-between;gap:8px;margin-bottom:10px}
+.case-cr{font-family:Arial,sans-serif;font-size:12px;font-weight:700;color:var(--text-muted);letter-spacing:0.3px}
+.case-ps{font-family:Arial,sans-serif;font-size:13px;font-weight:700;margin-top:2px;color:var(--text)}
+.case-cat-badge{font-family:Arial,sans-serif;font-size:10px;font-weight:800;letter-spacing:1.5px;padding:3px 9px;border-radius:12px;flex-shrink:0}
+.case-offense{font-family:Arial,sans-serif;font-size:12px;color:var(--text-muted);margin-bottom:10px;line-height:1.5}
+.case-what{font-family:Arial,sans-serif;font-size:13px;color:var(--text);line-height:1.55;margin-bottom:10px}
+.case-result{font-family:Arial,sans-serif;font-size:12.5px;font-weight:600;padding:8px 12px;border-radius:6px;border-left:3px solid var(--green-600);background:var(--green-50);color:var(--green-800);line-height:1.5}
+
+/* ── FIELD TIPS SECTION ── */
+.tips-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(310px,1fr));gap:14px;margin-bottom:24px}
+.tip-card{background:var(--surface);border:1px solid var(--border);border-radius:9px;padding:14px 16px;font-family:Arial,sans-serif;font-size:13.5px;line-height:1.6;display:flex;gap:12px;align-items:flex-start;box-shadow:0 1px 3px rgba(0,0,0,0.04)}
+.tip-icon{font-size:20px;flex-shrink:0;margin-top:1px}
+.tip-card.warn-card{border-left:3px solid var(--red-600);background:var(--red-50)}
+.tip-card.priority-card{border-left:3px solid var(--amber-400);background:var(--amber-50)}
+.tip-card.success-card{border-left:3px solid var(--green-600);background:var(--green-50)}
+
+/* ── IDENTIFIER TABLE ── */
+.id-table{width:100%;border-collapse:collapse;font-family:Arial,sans-serif;font-size:13px;background:var(--surface);border-radius:9px;overflow:hidden;box-shadow:0 1px 3px rgba(0,0,0,0.05);margin-bottom:24px}
+.id-table th{background:var(--teal-800);color:#fff;padding:10px 14px;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1px;text-align:left}
+.id-table td{padding:10px 14px;border-bottom:1px solid var(--border);vertical-align:top;line-height:1.5}
+.id-table tr:last-child td{border-bottom:none}
+.id-table td:first-child{font-weight:700;color:var(--teal-800);white-space:nowrap}
+.id-table tr:hover td{background:var(--gray-50)}
+
+/* ── EMPTY STATE ── */
+.empty-state{text-align:center;padding:56px 24px;background:var(--surface);border:1px dashed var(--border-strong);border-radius:10px;font-family:Arial,sans-serif;color:var(--text-muted);font-size:14px;line-height:1.8}
+.empty-icon{font-size:40px;margin-bottom:12px}
+
+/* ── FOOTER ── */
+footer{font-family:Arial,sans-serif;font-size:11.5px;color:var(--text-hint);text-align:center;padding:20px 0 4px;border-top:1px solid var(--border);margin-top:36px;letter-spacing:0.3px}
+
+@media(max-width:700px){
+  .input-grid{grid-template-columns:1fr}
+  .input-panel.wide{grid-column:auto}
+  .layout{grid-template-columns:1fr}
+  .side-col{position:static}
+  .cases-grid{grid-template-columns:1fr}
+  .header-top{padding:12px 16px}
+  .container{padding:16px 14px 36px}
+}
+
+@media print{
+  .tabs-bar,.generate-wrap,.chip,.input-grid,.case-id-wrap,.intro-card,.print-btn{display:none!important}
+  .step-body{display:block!important}
+  body{background:#fff;font-size:12px}
+  .golden-rule{background:#042C53!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .container{padding:0}
+}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-top">
+    <div class="header-logo">
+      <div class="logo-emblem">AP</div>
+      <div class="logo-text">
+        <div class="dept">Andhra Pradesh Police — Technical Services</div>
+        <div class="ltitle">NATGRID Gandiva Investigation Guide</div>
+      </div>
+    </div>
+    <div class="restricted-badge">&#x1F512; Restricted</div>
+  </div>
+  <div class="header-sub">
+    <span>&#x25A0; For Official Use Only</span>
+    <span class="dot"></span>
+    <span>&#x25A0; IOs, SHOs, CIs &amp; IT Core Teams</span>
+    <span class="dot"></span>
+    <span>&#x25A0; NATGRID SOP — Gandiva Application</span>
+    <span class="dot"></span>
+    <span>&#x25A0; 165+ AP Police Success Stories</span>
+  </div>
+  <div class="tabs-bar" id="tabs-bar">
+    <button class="tab-btn active" onclick="switchTab('wizard',this)">&#x1F4CB; Investigation Wizard</button>
+    <button class="tab-btn" onclick="switchTab('modules',this)">&#x1F4D6; Module Reference</button>
+    <button class="tab-btn" onclick="switchTab('cases',this)">&#x2714; Real Case Examples</button>
+    <button class="tab-btn" onclick="switchTab('tips',this)">&#x26A0; Field Tips</button>
+    <button class="tab-btn" onclick="switchTab('identifiers',this)">&#x1F4CB; Identifier Guide</button>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     TAB 1 — INVESTIGATION WIZARD
+══════════════════════════════════════════ -->
+<div class="tab-panel active" id="tab-wizard">
+<div class="container">
+
+  <div class="intro-card">
+    <div class="intro-icon">&#x1F50D;</div>
+    <div>
+      <h1>Case Investigation Wizard</h1>
+      <p>Select the offense type, available evidence, and accused status. The system determines your investigation category (A / B / C) and builds a step-by-step NATGRID module sequence tailored to your case. All three steps must happen together — <strong>NATGRID + CDR + Field Verification = Arrest.</strong></p>
+    </div>
+  </div>
+
+  <!-- CASE ID -->
+  <div class="case-id-wrap">
+    <div class="case-id-label">Case ID</div>
+    <input class="case-id-input" type="text" id="case-id-field" placeholder="AP-XXXXXXX" maxlength="20">
+    <div class="case-id-hint">&#x26A0; Mandatory — every NATGRID request requires a Case ID. No Case ID = request rejected.</div>
+  </div>
+
+  <!-- INPUT PANELS -->
+  <div class="input-grid">
+    <div class="input-panel">
+      <div class="panel-label">&#x1F4CB; Offense Type</div>
+      <div class="chips">
+        <div class="chip" data-g="offense" data-v="missing">Missing Person</div>
+        <div class="chip" data-g="offense" data-v="nbw">NBW / Warrant</div>
+        <div class="chip" data-g="offense" data-v="accident">Road Accident</div>
+        <div class="chip" data-g="offense" data-v="caw">Crime Against Women</div>
+        <div class="chip" data-g="offense" data-v="theft">Theft / Burglary</div>
+        <div class="chip" data-g="offense" data-v="ndps">NDPS / Narcotics</div>
+        <div class="chip" data-g="offense" data-v="murder">Murder / Homicide</div>
+        <div class="chip" data-g="offense" data-v="fraud">Cheating / Fraud</div>
+        <div class="chip" data-g="offense" data-v="cyber">Cybercrime / Social Media</div>
+        <div class="chip" data-g="offense" data-v="niact">NI Act / Cheque Bounce</div>
+      </div>
+    </div>
+
+    <div class="input-panel">
+      <div class="panel-label">&#x1F464; Accused Status</div>
+      <div class="chips">
+        <div class="chip" data-g="status" data-v="known">Identity Known, Location Unknown</div>
+        <div class="chip" data-g="status" data-v="unknown">Identity Unknown</div>
+        <div class="chip" data-g="status" data-v="absconding">Absconding / Fled State</div>
+        <div class="chip" data-g="status" data-v="abroad">May Have Fled Abroad</div>
+        <div class="chip" data-g="status" data-v="network">Gang / Multi-Accused Network</div>
+      </div>
+    </div>
+
+    <div class="input-panel wide">
+      <div class="panel-label">&#x1F4CE; Evidence &amp; Identifiers Available</div>
+      <div class="chips">
+        <div class="chip" data-g="ev" data-v="mobile">Mobile Number</div>
+        <div class="chip" data-g="ev" data-v="name">Name + Father's Name</div>
+        <div class="chip" data-g="ev" data-v="photo">Photograph / CCTV Image</div>
+        <div class="chip" data-g="ev" data-v="vehicle">Vehicle Number / Partial Plate</div>
+        <div class="chip" data-g="ev" data-v="pan">PAN Number</div>
+        <div class="chip" data-g="ev" data-v="passport">Passport Number</div>
+        <div class="chip" data-g="ev" data-v="family">Family Member Details</div>
+        <div class="chip" data-g="ev" data-v="ip">IP Address / Social Media Post</div>
+        <div class="chip" data-g="ev" data-v="bank">Bank Account / UPI Details</div>
+        <div class="chip" data-g="ev" data-v="coaccused">Co-Accused Phone Numbers</div>
+        <div class="chip" data-g="ev" data-v="dl">Driving Licence Number</div>
+        <div class="chip" data-g="ev" data-v="imei">IMEI Number</div>
+        <div class="chip" data-g="ev" data-v="towerdump">Tower Dump Available</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="generate-wrap">
+    <button class="generate-btn" onclick="render()">&#x25B6; Generate Investigation Guide</button>
+    <button class="reset-btn" onclick="resetAll()">&#x21BA; Reset</button>
+    <button class="print-btn" onclick="window.print()">&#x1F5A8; Print Guide</button>
+  </div>
+
+  <!-- OUTPUT -->
+  <div id="guide-area">
+    <div class="empty-state">
+      <div class="empty-icon">&#x1F4CB;</div>
+      <strong>Select case details above and click "Generate Investigation Guide"</strong><br>
+      The system will determine your investigation category and build a step-by-step NATGRID module sequence.<br>
+      <span style="font-size:12px;margin-top:8px;display:block">&#x2139; Tip: You can select multiple offenses and evidence types — the guide adapts to all combinations.</span>
+    </div>
+  </div>
+
+  <footer>
+    For Official Use Only &nbsp;|&nbsp; NATGRID SOP &nbsp;|&nbsp; AP Police Technical Services &nbsp;|&nbsp; Gandiva Application
+  </footer>
+</div>
+</div><!-- /tab-wizard -->
+
+<!-- ══════════════════════════════════════════
+     TAB 2 — MODULE REFERENCE
+══════════════════════════════════════════ -->
+<div class="tab-panel" id="tab-modules">
+<div class="container">
+
+  <div class="section-title">NATGRID Modules at a Glance</div>
+  <div class="section-sub">Match your available input to the correct module before submitting to the IT Core Team. Always include your Case ID (AP-XXXXXXX) with every request.</div>
+
+  <table class="qref-table" style="margin-bottom:28px">
+    <thead>
+      <tr><th>Module</th><th>You Provide</th><th>You Get</th><th>Best For</th><th>Category</th></tr>
+    </thead>
+    <tbody>
+      <tr class="qref-category-A">
+        <td>ER Search</td>
+        <td>Mobile No. / Name / DL No.</td>
+        <td>Alternate numbers, address, photo from KYC, vehicle registration</td>
+        <td>Tracing accused by phone, name, or driving licence — works on switched-off &amp; 10-year-old numbers</td>
+        <td><span class="qref-badge badge-a-sm">A</span> <span class="qref-badge badge-b-sm">B</span> <span class="qref-badge badge-c-sm">C</span></td>
+      </tr>
+      <tr class="qref-category-A">
+        <td>Image Search (Gandiva)</td>
+        <td>Photograph (CCTV still, profile pic, Aadhaar)</td>
+        <td>Matched name, mobile, address, PAN, vehicle — 91–100% match confidence in AP cases</td>
+        <td>Identifying unknown suspects from photo; old FIR photos (even 30 years old) work</td>
+        <td><span class="qref-badge badge-a-sm">A</span> <span class="qref-badge badge-b-sm">B</span> <span class="qref-badge badge-c-sm">C</span></td>
+      </tr>
+      <tr class="qref-category-A">
+        <td>MoRTH / VAHAN / SARATHI</td>
+        <td>Vehicle registration No. / DL No.</td>
+        <td>Owner name, mobile, current address</td>
+        <td>Tracing crime vehicle owner or driver; partial plates like AP39XX are usable</td>
+        <td><span class="qref-badge badge-a-sm">A</span> <span class="qref-badge badge-b-sm">B</span></td>
+      </tr>
+      <tr class="qref-category-A">
+        <td>QR – NHAI / FASTag</td>
+        <td>Vehicle registration No.</td>
+        <td>Complete toll crossing history, FASTag-linked bank account</td>
+        <td>Tracking vehicle escape route; hit-and-run; vehicle-based fraud networks</td>
+        <td><span class="qref-badge badge-a-sm">A</span> <span class="qref-badge badge-b-sm">B</span> <span class="qref-badge badge-c-sm">C</span></td>
+      </tr>
+      <tr class="qref-category-C">
+        <td>QR – CBDT (PAN)</td>
+        <td>PAN number</td>
+        <td>Linked mobile, address, income tax records, bank links</td>
+        <td>Financial investigation, NDPS asset seizure, fraud networks</td>
+        <td><span class="qref-badge badge-c-sm">C</span> <span class="qref-badge badge-b-sm">B</span></td>
+      </tr>
+      <tr class="qref-category-C">
+        <td>QR – MEA Passport</td>
+        <td>Passport No. / Name / Mobile</td>
+        <td>Issuance address, DOB, passport type — confirms passport exists</td>
+        <td>Confirming accused passport status before assuming flight abroad</td>
+        <td><span class="qref-badge badge-a-sm">A</span> <span class="qref-badge badge-c-sm">C</span></td>
+      </tr>
+      <tr class="qref-category-C">
+        <td>QR – BOI Immigration</td>
+        <td>Passport number</td>
+        <td>All India entry/exit records with date and port of travel</td>
+        <td>Confirming accused fled abroad — the ONLY authoritative source for this</td>
+        <td><span class="qref-badge badge-a-sm">A</span> <span class="qref-badge badge-c-sm">C</span></td>
+      </tr>
+      <tr class="qref-category-A">
+        <td>QR – NPR / RGI</td>
+        <td>Family member details</td>
+        <td>Latest registered mobile and address for family members</td>
+        <td>Fresh number when all known phone numbers are switched off or dead</td>
+        <td><span class="qref-badge badge-a-sm">A</span></td>
+      </tr>
+      <tr>
+        <td>94 BNSS Notice</td>
+        <td>Platform URL / post / account</td>
+        <td>Account registration details, IP logs, login history from platform</td>
+        <td>Cybercrime, social media offenses, digital arrest fraud</td>
+        <td><span class="qref-badge badge-c-sm">C</span></td>
+      </tr>
+      <tr>
+        <td>CEIR / IMEI Tracking</td>
+        <td>IMEI number</td>
+        <td>Current SIM linked to device, live location</td>
+        <td>Accused switched SIMs — IMEI survives all SIM changes</td>
+        <td><span class="qref-badge badge-b-sm">B</span> <span class="qref-badge badge-c-sm">C</span></td>
+      </tr>
+      <tr>
+        <td>Sudarshan (Social Media Cell)</td>
+        <td>All NATGRID failed</td>
+        <td>New SIM, family contact, deep-web address</td>
+        <td>Last resort when all other NATGRID modules are exhausted</td>
+        <td><span class="qref-badge badge-a-sm">A</span> <span class="qref-badge badge-b-sm">B</span></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="section-title">Category Quick-Select</div>
+  <div class="section-sub">Every offense type maps to a master category. Use this to quickly identify which procedure to follow.</div>
+
+  <table class="qref-table" style="margin-bottom:28px">
+    <thead>
+      <tr><th style="width:33%">Category A — Locate &amp; Trace <span class="qref-badge badge-a-sm">75+ AP Cases</span></th>
+          <th style="width:33%">Category B — Identify &amp; Arrest <span class="qref-badge badge-b-sm">60+ AP Cases</span></th>
+          <th style="width:33%">Category C — Financial &amp; Digital <span class="qref-badge badge-c-sm">32+ AP Cases</span></th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Missing Persons<br>NBW / Warrant Execution<br>Road Accidents (hit &amp; run)<br>Crime Against Women (absconding accused)</td>
+        <td>Theft / Burglary<br>NDPS / Narcotics<br>Murder / Homicide<br>Crime Against Women (identity unknown)</td>
+        <td>Cheating / Fraud<br>Cybercrime &amp; Social Media<br>NDPS Asset Seizure<br>Financial Fraud Networks<br>NI Act / Cheque Bounce</td>
+      </tr>
+      <tr>
+        <td style="font-size:12px;color:var(--text-muted)"><strong>Primary tools:</strong> ER Search, Image Search, QR-NPR, MoRTH, CDR</td>
+        <td style="font-size:12px;color:var(--text-muted)"><strong>Primary tools:</strong> Image Search (Gandiva), MoRTH, Tower Dump, ER Search, CDR+IMEI</td>
+        <td style="font-size:12px;color:var(--text-muted)"><strong>Primary tools:</strong> QR-CBDT (PAN), MEA Passport, BOI Immigration, 94 BNSS, FASTag</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="section-title">Quick Reference — I Have… What Do I Use?</div>
+  <table class="qref-table">
+    <thead>
+      <tr><th>I Have…</th><th>Use This Module</th><th>I Will Get…</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Mobile number (active or inactive)</td><td>ER Search</td><td>Alternate numbers, address, photo, vehicle, KYC</td></tr>
+      <tr><td>Photograph / CCTV image</td><td>Image Search (Gandiva)</td><td>Name, mobile, address, PAN, DL, vehicle</td></tr>
+      <tr><td>Vehicle registration number</td><td>MoRTH + QR (NHAI)</td><td>Owner, address, FASTag toll crossing history</td></tr>
+      <tr><td>PAN number</td><td>QR (CBDT)</td><td>Identity, financial records, bank links</td></tr>
+      <tr><td>Passport number — confirm identity</td><td>QR (MEA)</td><td>Passport address, DOB, issuance details</td></tr>
+      <tr><td>Passport number — check travel</td><td>QR (BOI)</td><td>Every India entry/exit with date and port</td></tr>
+      <tr><td>Family member details</td><td>QR (NPR)</td><td>Latest registered mobile number and address</td></tr>
+      <tr><td>Name only</td><td>ER Search (name field)</td><td>Linked mobile, address, alternate numbers</td></tr>
+      <tr><td>IP address from platform</td><td>ISP → IPDR → CEIR → ER Search</td><td>Device IMEI → current number → real name &amp; address</td></tr>
+      <tr><td>All NATGRID failed — still absconding</td><td>Sudarshan (via Social Media Cell)</td><td>New SIM, family contact, deep-web address</td></tr>
+    </tbody>
+  </table>
+
+  <footer>For Official Use Only &nbsp;|&nbsp; NATGRID SOP &nbsp;|&nbsp; AP Police Technical Services</footer>
+</div>
+</div><!-- /tab-modules -->
+
+<!-- ══════════════════════════════════════════
+     TAB 3 — REAL CASE EXAMPLES
+══════════════════════════════════════════ -->
+<div class="tab-panel" id="tab-cases">
+<div class="container">
+
+  <div class="section-title">Category A — Locate &amp; Trace <span class="qref-badge badge-a-sm" style="font-size:12px;vertical-align:middle">75+ AP Cases</span></div>
+  <div class="section-sub">Cases where the accused or missing person was known but location was unknown. Identity already established — goal was tracing current whereabouts.</div>
+  <div class="cases-grid">
+
+    <div class="case-card">
+      <div class="case-card-header">
+        <div><div class="case-cr">Cr.No.219/2022 — Ganapavaram PS, Eluru</div><div class="case-ps">Missing Person — 4 Years</div></div>
+        <span class="case-cat-badge badge-A" style="background:var(--blue-800);color:#fff">CAT A</span>
+      </div>
+      <div class="case-offense">&#x1F4CD; Man missing for 4 years. Family had given up hope. No digital history.</div>
+      <div class="case-what"><strong>What happened:</strong> IO ran ER Search on name alone. NATGRID returned Mumbai address and PAN details. CDR confirmed he was active in Mumbai.</div>
+      <div class="case-result">&#x2714; IO traveled to Mumbai. Found missing person working at a hotel. Reunited with family after 4 years.</div>
+    </div>
+
+    <div class="case-card">
+      <div class="case-card-header">
+        <div><div class="case-cr">Cr.Nos.52,53,54,21/1992 — Srikakulam II Town PS</div><div class="case-ps">NBW — 30+ Year Old Warrants (Dacoity)</div></div>
+        <span class="case-cat-badge" style="background:var(--blue-800);color:#fff">CAT A</span>
+      </div>
+      <div class="case-offense">&#x1F4CD; NBWs from 1992 pending. No digital history available. Only old photographs.</div>
+      <div class="case-what"><strong>What happened:</strong> IOs uploaded photographs from old FIR records into NATGRID Image Search. System returned image matches and alternate numbers. CDR revealed current locations of all four accused.</div>
+      <div class="case-result">&#x2714; All four accused traced. 30-year-old NBWs executed in 2025.</div>
+    </div>
+
+    <div class="case-card">
+      <div class="case-card-header">
+        <div><div class="case-cr">Cr.No.48/2024 — Pakala PS, Tirupati</div><div class="case-ps">Crime Against Women — Accused Fled</div></div>
+        <span class="case-cat-badge" style="background:var(--blue-800);color:#fff">CAT A</span>
+      </div>
+      <div class="case-offense">&#x1F4CD; Accused's location unknown. Only image available. No mobile number on record.</div>
+      <div class="case-what"><strong>What happened:</strong> Image uploaded to Gandiva. Father's name obtained from match. MEA Search retrieved passport details. BOI confirmed accused had returned to India.</div>
+      <div class="case-result">&#x2714; 41A notice issued and served. Full identity chain: Image → MEA → BOI.</div>
+    </div>
+
+    <div class="case-card">
+      <div class="case-card-header">
+        <div><div class="case-cr">Cr.No.82/2024 — Kaviti PS, Srikakulam</div><div class="case-ps">Road Accident — Hit and Run</div></div>
+        <span class="case-cat-badge" style="background:var(--blue-800);color:#fff">CAT A</span>
+      </div>
+      <div class="case-offense">&#x1F697; Vehicle details available. Driver fled the scene after accident.</div>
+      <div class="case-what"><strong>What happened:</strong> FASTag and toll plaza data analyzed through NATGRID to track vehicle's movement after accident. Route mapped completely.</div>
+      <div class="case-result">&#x2714; Accused identified and apprehended through FASTag-based route mapping.</div>
+    </div>
+
+  </div>
+
+  <div class="section-title">Category B — Identify &amp; Arrest <span class="qref-badge badge-b-sm" style="font-size:12px;vertical-align:middle">60+ AP Cases</span></div>
+  <div class="section-sub">Cases where the accused's identity was unknown. Physical or digital evidence from scene used to establish who committed the crime.</div>
+  <div class="cases-grid">
+
+    <div class="case-card">
+      <div class="case-card-header">
+        <div><div class="case-cr">Cr.No.23/2025 — Ulindakonda PS, Kurnool</div><div class="case-ps">ATM Robbery — Vehicle Tracked Across India &#x2705; CONVICTED</div></div>
+        <span class="case-cat-badge" style="background:var(--teal-800);color:#fff">CAT B</span>
+      </div>
+      <div class="case-offense">&#x1F69A; Accused used container truck to steal an ATM. CCTV captured the plate.</div>
+      <div class="case-what"><strong>What happened:</strong> MoRTH identified truck owner (AXIS Transport). NHAI FASTag mapped complete route: Amakatadu → Gooty → Maroor toll plazas northward. CDR + IMEI tracked driver to Hosur. All 4 accused arrested at Rajasthan dhaba.</div>
+      <div class="case-result">&#x2714; CONVICTED 29.04.2025 by JMFC Kurnool. 3 years Rigorous Imprisonment + Rs.14,000 fine per accused. NATGRID-to-conviction in under 4 months.</div>
+    </div>
+
+    <div class="case-card">
+      <div class="case-card-header">
+        <div><div class="case-cr">Cr.No.108/2024 — Koyyuru PS, Alluri Sitharamaraju</div><div class="case-ps">NDPS — Absconding A3 Traced via CDR IMEI Chain</div></div>
+        <span class="case-cat-badge" style="background:var(--teal-800);color:#fff">CAT B</span>
+      </div>
+      <div class="case-offense">&#x1F48A; A4-A6 arrested and confessed A3's phone number. All numbers switched off.</div>
+      <div class="case-what"><strong>What happened:</strong> IMEI analysis found A3 had switched to new SIM. New number submitted for live location. Gandiva Image Search confirmed identity at 100% match.</div>
+      <div class="case-result">&#x2714; A3 successfully identified and arrested. Model case for IMEI-based tracing in NDPS.</div>
+    </div>
+
+    <div class="case-card">
+      <div class="case-card-header">
+        <div><div class="case-cr">Cr.No.40/2025 — Chippagiri PS, Kurnool</div><div class="case-ps">Murder for Gain — Full Network via Vehicle + NATGRID</div></div>
+        <span class="case-cat-badge" style="background:var(--teal-800);color:#fff">CAT B</span>
+      </div>
+      <div class="case-offense">&#x1F697; Ashok Leyland Tipper used in murder. CCTV captured it. Multiple accused.</div>
+      <div class="case-what"><strong>What happened:</strong> MoRTH returned owner (AXIS Transport). Owner disclosed sale to A7. ER Search on A7 returned photo and alternates. Tower dump cross-referenced with CDR contacts.</div>
+      <div class="case-result">&#x2714; All linked numbers identified with photographs. Vehicle ownership chain established. All accused identified, charge sheet filed.</div>
+    </div>
+
+    <div class="case-card">
+      <div class="case-card-header">
+        <div><div class="case-cr">Cr.Nos.89,92/2023 — S. Kota PS, Vizianagaram</div><div class="case-ps">NDPS — Rs.42.7 Lakh Property Seized</div></div>
+        <span class="case-cat-badge" style="background:var(--teal-800);color:#fff">CAT B</span>
+      </div>
+      <div class="case-offense">&#x1F48A; Odisha accused — photo uploaded to Gandiva. System returned PAN card details.</div>
+      <div class="case-what"><strong>What happened:</strong> IO wrote to Income Tax Department, Odisha using the PAN. Second accused: mobile ER Search returned PAN. Financial investigation confirmed property acquired through ganja trade.</div>
+      <div class="case-result">&#x2714; Property worth Rs.42.7 lakh seized — enabled entirely by NATGRID-derived PAN data.</div>
+    </div>
+
+  </div>
+
+  <div class="section-title">Category C — Financial &amp; Digital Trail <span class="qref-badge badge-c-sm" style="font-size:12px;vertical-align:middle">32+ AP Cases</span></div>
+  <div class="section-sub">Cases involving financial transactions, online activity, or multi-state fraud networks. Goal is building a court-ready evidence trail.</div>
+  <div class="cases-grid">
+
+    <div class="case-card">
+      <div class="case-card-header">
+        <div><div class="case-cr">Cr.No.41/2025 — Piduguralla PS, Palnadu</div><div class="case-ps">Rs.35–40 Crore Cheating — Accused in Dubai</div></div>
+        <span class="case-cat-badge" style="background:var(--amber-800);color:#fff">CAT C</span>
+      </div>
+      <div class="case-offense">&#x1F4B0; Accused Perumalla Rajesh fled to Dubai after massive fraud.</div>
+      <div class="case-what"><strong>What happened:</strong> IO used NATGRID with phone, passport, PAN, and email. MEA Search confirmed passport. BOI returned international travel records showing exit to Dubai. Bank and mobile activity confirmed financial trail.</div>
+      <div class="case-result">&#x2714; Accused confirmed in Dubai. Rs.35–40 crore fraud trail documented. Red Notice initiated via Bharatpol using NATGRID passport data.</div>
+    </div>
+
+    <div class="case-card">
+      <div class="case-card-header">
+        <div><div class="case-cr">Cr.Nos.194,297,138/2025 — West Godavari (3 PSs)</div><div class="case-ps">Digital Arrest Fraud — Rs.12 Lakh Extorted (14 Accused)</div></div>
+        <span class="case-cat-badge" style="background:var(--amber-800);color:#fff">CAT C</span>
+      </div>
+      <div class="case-offense">&#x1F4F1; Fraudsters posed as Supreme Court officials and extorted Rs.12 lakh via digital arrest.</div>
+      <div class="case-what"><strong>What happened:</strong> IO obtained IP logs from Amazon Pay, issued 94 BNSS notice. Jio provided IPDR. IMEI revealed. NATGRID ER Search on linked mobile returned owner details. Full network of A1–A14 mapped.</div>
+      <div class="case-result">&#x2714; A1 &amp; A2 arrested immediately. A3–A14 arrested and remanded. All 14 accused found using NATGRID.</div>
+    </div>
+
+    <div class="case-card">
+      <div class="case-card-header">
+        <div><div class="case-cr">Cr.No.91/2024 — Chinna Chowk PS, YSR Kadapa</div><div class="case-ps">Cheating — Accused Confirmed Still in India via MEA/BOI</div></div>
+        <span class="case-cat-badge" style="background:var(--amber-800);color:#fff">CAT C</span>
+      </div>
+      <div class="case-offense">&#x1F4B0; Accused suspected of having fled abroad. Misdirected international manhunt threatened.</div>
+      <div class="case-what"><strong>What happened:</strong> IO ran ER + CBDT + MEA Search combination. MEA returned passport details. BOI immigration search confirmed NO recent exit — accused still in India. CBDT returned financial address.</div>
+      <div class="case-result">&#x2714; Accused confirmed in India. Arrest made using NATGRID address. Misdirected international manhunt avoided.</div>
+    </div>
+
+    <div class="case-card">
+      <div class="case-card-header">
+        <div><div class="case-cr">Cr.No.386/2024 — Krishnalanka PS, NTR</div><div class="case-ps">Online Abusive Content — Suspect ID'd from One Photo</div></div>
+        <span class="case-cat-badge" style="background:var(--amber-800);color:#fff">CAT C</span>
+      </div>
+      <div class="case-offense">&#x1F4F1; Only a profile image was available from social media account. No other identifiers.</div>
+      <div class="case-what"><strong>What happened:</strong> IO uploaded profile photo to Gandiva Image Search. System returned match with phone number and colony address. Identity confirmed via field verification.</div>
+      <div class="case-result">&#x2714; Accused identified within hours. Legal action taken within 24 hours — purely from one photograph.</div>
+    </div>
+
+  </div>
+
+  <footer>For Official Use Only &nbsp;|&nbsp; NATGRID SOP &nbsp;|&nbsp; AP Police Technical Services</footer>
+</div>
+</div><!-- /tab-cases -->
+
+<!-- ══════════════════════════════════════════
+     TAB 4 — FIELD TIPS
+══════════════════════════════════════════ -->
+<div class="tab-panel" id="tab-tips">
+<div class="container">
+
+  <div class="section-title">Critical Warnings — Never Ignore</div>
+  <div class="tips-grid">
+    <div class="tip-card warn-card"><div class="tip-icon">&#x26A0;</div><div><strong>Never arrest on NATGRID data alone.</strong> NATGRID + CDR + Field Verification = Arrest. All three must happen together before any action is taken.</div></div>
+    <div class="tip-card warn-card"><div class="tip-icon">&#x26A0;</div><div><strong>BOI Immigration is the ONLY authoritative source</strong> for 'has the accused fled India?' Never assume or conclude without running BOI Immigration Search.</div></div>
+    <div class="tip-card warn-card"><div class="tip-icon">&#x26A0;</div><div><strong>Case ID is mandatory.</strong> Every NATGRID request requires AP-XXXXXXX. No Case ID = request rejected. Register FIR first.</div></div>
+    <div class="tip-card warn-card"><div class="tip-icon">&#x26A0;</div><div><strong>In murder cases, do NOT wait for forensics</strong> — submit NATGRID request simultaneously. Digital trails deteriorate fast. Submit within 1 hour of FIR.</div></div>
+    <div class="tip-card warn-card"><div class="tip-icon">&#x26A0;</div><div><strong>A 75–80% Gandiva match is a starting point</strong>, not confirmation. Field verification is always required to confirm or rule out the identity.</div></div>
+    <div class="tip-card warn-card"><div class="tip-icon">&#x26A0;</div><div><strong>If owner sold the vehicle,</strong> get the buyer's contact and run that through NATGRID immediately. Do not stop at the first registered owner.</div></div>
+  </div>
+
+  <div class="section-title">Priority Actions — Do These First</div>
+  <div class="tips-grid">
+    <div class="tip-card priority-card"><div class="tip-icon">&#x1F525;</div><div><strong>Submit NATGRID within 30 minutes of FIR</strong> in Missing Persons cases — the golden hour applies to intelligence, not just field response.</div></div>
+    <div class="tip-card priority-card"><div class="tip-icon">&#x1F525;</div><div><strong>Mark PRIORITY</strong> for Crime Against Women and child cases. This enables faster processing by the IT Core Team.</div></div>
+    <div class="tip-card priority-card"><div class="tip-icon">&#x1F525;</div><div><strong>Run Image Search and 94 BNSS notice in parallel</strong> for cybercrime cases. Do not wait for one to finish before starting the other.</div></div>
+    <div class="tip-card priority-card"><div class="tip-icon">&#x1F525;</div><div><strong>In gang cases, run ALL recovered phones through NATGRID simultaneously</strong> to map the complete network. Never run sequentially.</div></div>
+    <div class="tip-card priority-card"><div class="tip-icon">&#x1F525;</div><div><strong>For NDPS: run PAN Search not just for identity</strong> but to unlock bank accounts for asset seizure under Section 68-A NDPS Act.</div></div>
+    <div class="tip-card priority-card"><div class="tip-icon">&#x1F525;</div><div><strong>For NI Act / cheque bounce:</strong> the mobile number printed on the cheque is usually the best ER Search starting point.</div></div>
+  </div>
+
+  <div class="section-title">Proven Techniques — Use These</div>
+  <div class="tips-grid">
+    <div class="tip-card success-card"><div class="tip-icon">&#x2714;</div><div><strong>A switched-off or even 10-year-old number still works for ER Search.</strong> NATGRID uses KYC records, not live SIM status.</div></div>
+    <div class="tip-card success-card"><div class="tip-icon">&#x2714;</div><div><strong>Never assume an old NBW is too old.</strong> 1992 warrants were successfully cracked using NATGRID in 2025. Old FIR photos return 90–98% confidence.</div></div>
+    <div class="tip-card success-card"><div class="tip-icon">&#x2714;</div><div><strong>All numbers switched off is NOT a dead end.</strong> IMEI tracking and metadata analysis still work. Request IMEI analysis even for inactive numbers.</div></div>
+    <div class="tip-card success-card"><div class="tip-icon">&#x2714;</div><div><strong>FASTag data maps exact escape route.</strong> Combine with CDR tower data for the same timeframe to cross-confirm location after the crime.</div></div>
+    <div class="tip-card success-card"><div class="tip-icon">&#x2714;</div><div><strong>Record Gandiva match percentage in case diary</strong> (e.g. "94.66% match from Telecom database"). This adds significant credibility in court.</div></div>
+    <div class="tip-card success-card"><div class="tip-icon">&#x2714;</div><div><strong>Family NPR details are the fastest backup</strong> when all known phone numbers of the accused are switched off or dead.</div></div>
+    <div class="tip-card success-card"><div class="tip-icon">&#x2714;</div><div><strong>Tower dump + NATGRID ER is the strongest combination</strong> when no eyewitness can identify the accused.</div></div>
+    <div class="tip-card success-card"><div class="tip-icon">&#x2714;</div><div><strong>For inter-state cases,</strong> write formally to local SO/SP with NATGRID data. A formal coordination letter gets faster cooperation.</div></div>
+    <div class="tip-card success-card"><div class="tip-icon">&#x2714;</div><div><strong>If BOI shows no recent exit — accused is still in India.</strong> This prevented a misdirected international manhunt in Cr.No.91/2024.</div></div>
+    <div class="tip-card success-card"><div class="tip-icon">&#x2714;</div><div><strong>For social media offenses:</strong> most people use real profile photos. Try Image Search first before issuing 94 BNSS notice to the platform.</div></div>
+    <div class="tip-card success-card"><div class="tip-icon">&#x2714;</div><div><strong>Crime vehicle number is the fastest entry point</strong> — even if abandoned, registration traces the owner chain back to the accused.</div></div>
+    <div class="tip-card success-card"><div class="tip-icon">&#x2714;</div><div><strong>Run CDR analysis and bank notice simultaneously</strong> for fraud cases — parallel actions save critical time in fast-moving financial investigations.</div></div>
+  </div>
+
+  <footer>For Official Use Only &nbsp;|&nbsp; NATGRID SOP &nbsp;|&nbsp; AP Police Technical Services</footer>
+</div>
+</div><!-- /tab-tips -->
+
+<!-- ══════════════════════════════════════════
+     TAB 5 — IDENTIFIER GUIDE
+══════════════════════════════════════════ -->
+<div class="tab-panel" id="tab-identifiers">
+<div class="container">
+
+  <div class="section-title">Identifiers by Subject Type — Missing Persons (Cat A)</div>
+  <div class="section-sub">When handling missing persons, collect these specific identifiers based on subject type to maximize NATGRID response quality.</div>
+
+  <table class="id-table">
+    <thead><tr><th>Subject Type</th><th>Key Identifiers to Collect</th></tr></thead>
+    <tbody>
+      <tr>
+        <td>Adult Females</td>
+        <td>PAN number, UPI/VPA (UPI-registered mobile), mobile (IMSI/IMEI), tower dump data, bank ATM transaction locations</td>
+      </tr>
+      <tr>
+        <td>Female Minors</td>
+        <td>Static/Dynamic IP, MAC address, ISP logs, social media UID (Instagram/Snapchat), linked mobile numbers, VoIP logs (WhatsApp/Telegram timestamps)</td>
+      </tr>
+      <tr>
+        <td>Male Minors</td>
+        <td>PNR (IRCTC/airlines), Aadhaar, FASTag ID, vehicle registration (VAHAN) for tracking autos or family vehicles</td>
+      </tr>
+      <tr>
+        <td>Adult Males</td>
+        <td>CIBIL inquiry history, PAN-linked loan applications, passport (MEA/Immigration), DL via SARATHI</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="section-title">Digital Evidence Chain — Cybercrime &amp; Social Media (Cat C)</div>
+  <div class="section-sub">When no profile photo lead exists, follow this IP chain to reach the accused's real identity. Document every step with dates.</div>
+
+  <table class="id-table">
+    <thead><tr><th>Step</th><th>Action</th><th>Output</th></tr></thead>
+    <tbody>
+      <tr><td>Step 1</td><td>Issue 94 BNSS Notice to platform (Twitter/X, Facebook, Instagram, WhatsApp)</td><td>Account registration details, IP address logs, login history</td></tr>
+      <tr><td>Step 2</td><td>Identify ISP from IP address (Jio / Airtel / BSNL)</td><td>Internet Service Provider name</td></tr>
+      <tr><td>Step 3</td><td>Write to ISP for IPDR (IP Detail Record)</td><td>IPDR containing device IMEI and session logs</td></tr>
+      <tr><td>Step 4</td><td>Submit IMEI to CEIR</td><td>Current mobile number linked to device</td></tr>
+      <tr><td>Step 5</td><td>ER Search on mobile number via NATGRID</td><td>Real name, address, photo, alternate numbers</td></tr>
+      <tr><td>Step 6</td><td>CDR Analysis on returned numbers</td><td>Tower location, B-party contacts, escape route</td></tr>
+      <tr><td>Step 7</td><td>Field verification at NATGRID address</td><td>Confirmed identity → legal action</td></tr>
+    </tbody>
+  </table>
+
+  <div class="section-title">NDPS Technical Evidence Chain (Cat B / C)</div>
+  <div class="section-sub">Court scrutiny is especially high in NDPS cases. Document this complete chain in the charge sheet as technical evidence narrative.</div>
+
+  <table class="id-table">
+    <thead><tr><th>Step</th><th>Source</th><th>What It Establishes</th></tr></thead>
+    <tbody>
+      <tr><td>1</td><td>Co-accused A1/A2 confession + mediator's report</td><td>Absconding accused's phone number (voluntary disclosure)</td></tr>
+      <tr><td>2</td><td>NATGRID ER Search on disclosed number</td><td>Real identity, alternate numbers, address, photo</td></tr>
+      <tr><td>3</td><td>CDR Analysis (even if SIM is switched off)</td><td>IMEI from last active session</td></tr>
+      <tr><td>4</td><td>IMEI tracking via CEIR</td><td>New SIM linked to same device → current location</td></tr>
+      <tr><td>5</td><td>Gandiva Image Search on identity</td><td>100% match confirmation (as in Cr.No.108/2024)</td></tr>
+      <tr><td>6</td><td>QR-CBDT (PAN) Search</td><td>Bank accounts linked to identity → asset seizure</td></tr>
+      <tr><td>7</td><td>Field verification + arrest</td><td>Physical confirmation before arrest</td></tr>
+    </tbody>
+  </table>
+
+  <div class="section-title">Case Diary Documentation Checklist</div>
+  <div class="section-sub">Every link of the digital evidence chain must be documented with dates. Courts look for this narrative in the charge sheet.</div>
+
+  <table class="id-table">
+    <thead><tr><th>What to Document</th><th>How to Record</th></tr></thead>
+    <tbody>
+      <tr><td>Gandiva match percentage</td><td>Record exact figure: "94.66% match from Telecom database" — adds court credibility</td></tr>
+      <tr><td>All NATGRID request submissions</td><td>Date of submission, Case ID, module used, requesting officer name</td></tr>
+      <tr><td>All NATGRID responses</td><td>Date received, modules used, data returned, action taken based on data</td></tr>
+      <tr><td>CDR request and response</td><td>Numbers submitted, CDR unit reference, tower locations returned</td></tr>
+      <tr><td>Field verification</td><td>Officers deployed, date, address visited, identification method used</td></tr>
+      <tr><td>Inter-state coordination</td><td>Letter reference, SP/SO contacted, date sent, response received</td></tr>
+      <tr><td>Platform notice (94 BNSS)</td><td>Platform name, post URL, date issued, date response received, IP addresses returned</td></tr>
+      <tr><td>Bank notice</td><td>Bank name, account number, notice date, freeze order date, transaction records obtained</td></tr>
+    </tbody>
+  </table>
+
+  <footer>For Official Use Only &nbsp;|&nbsp; NATGRID SOP &nbsp;|&nbsp; AP Police Technical Services</footer>
+</div>
+</div><!-- /tab-identifiers -->
+
+<script>
+// ── STATE ──
+const state = { offense: new Set(), ev: new Set(), status: new Set() };
+
+// ── CHIP INTERACTION ──
+document.querySelectorAll('.chip').forEach(c => {
+  c.addEventListener('click', () => {
+    const g = c.dataset.g, v = c.dataset.v;
+    if (state[g].has(v)) {
+      state[g].delete(v);
+      c.classList.remove('on','c-teal','c-amber','c-green','c-red','c-blue');
+    } else {
+      state[g].add(v);
+      c.classList.add('on');
+      const colorMap = {
+        offense: { missing:'c-blue',nbw:'c-blue',accident:'c-blue',caw:'c-blue',
+                   theft:'c-teal',ndps:'c-teal',murder:'c-teal',
+                   fraud:'c-amber',cyber:'c-amber',niact:'c-amber' },
+        status:  { default:'c-green' },
+        ev:      { default:'c-blue' }
+      };
+      if (g === 'offense') c.classList.add(colorMap.offense[v] || 'c-blue');
+      if (g === 'status')  c.classList.add('c-green');
+      if (g === 'ev')      c.classList.add('c-blue');
+    }
+  });
+});
+
+// ── TAB SWITCHING ──
+function switchTab(id, btn) {
+  document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('tab-' + id).classList.add('active');
+  btn.classList.add('active');
+}
+
+// ── HELPERS ──
+function has(g,v) { return state[g].has(v); }
+function hasAny(g,...vs) { return vs.some(v => state[g].has(v)); }
+function ev(...vs) { return hasAny('ev',...vs); }
+function off(...vs) { return hasAny('offense',...vs); }
+function st(...vs) { return hasAny('status',...vs); }
+
+function tag(label, color) { return `<span class="mod-tag mod-${color}">${label}</span>`; }
+function tip(text, type='') { return `<div class="tip ${type}">${text}</div>`; }
+
+// ── CATEGORY LOGIC ──
+function catFromState() {
+  const hasOffense = state.offense.size > 0;
+  const hasEv = state.ev.size > 0;
+  const hasSt = state.status.size > 0;
+
+  // Category C: financial/digital crimes always take this path
+  if (off('fraud','cyber','niact')) return 'C';
+  // NDPS with financial evidence → Cat C
+  if (off('ndps') && (ev('pan') || ev('bank'))) return 'C';
+
+  // Category B: identity unknown + crime-scene offense
+  if (st('unknown')) return 'B';
+  if (off('theft','murder') && !st('known') && !st('absconding') && !st('abroad')) return 'B';
+  if (off('ndps') && !st('known') && !st('absconding') && !st('abroad')) return 'B';
+
+  // Category A: known identity, need to locate
+  if (off('missing','nbw','accident')) return 'A';
+  if (off('caw') && !st('unknown')) return 'A';
+  if (st('known') || st('absconding') || st('abroad')) return 'A';
+
+  // Fallback: any offense or evidence provided
+  if (hasOffense || hasEv || hasSt) return 'A';
+  return null;
+}
+
+// ── STEP BUILDER ──
+function makeStep(num, cat, title, modules, body) {
+  const nc = `num-${cat}`;
+  const modHTML = modules.map(([l,c]) => tag(l,c)).join(' ');
+  return `
+  <div class="step-card">
+    <div class="step-card-header" onclick="toggleStep(this)">
+      <div class="step-num ${nc}">${num}</div>
+      <div class="step-title-text">${title}</div>
+      <div class="step-modules">${modHTML}</div>
+      <div class="chevron">&#x25BE;</div>
+    </div>
+    <div class="step-body">${body}</div>
+  </div>`;
+}
+
+function toggleStep(header) {
+  const body = header.nextElementSibling;
+  const chevron = header.querySelector('.chevron');
+  const isOpen = body.classList.contains('open');
+  body.classList.toggle('open', !isOpen);
+  chevron.classList.toggle('open', !isOpen);
+}
+
+// ── MAIN RENDER ──
+function render() {
+  const area = document.getElementById('guide-area');
+  const cat = catFromState();
+  const caseId = document.getElementById('case-id-field').value.trim();
+
+  if (!cat) {
+    area.innerHTML = `<div class="empty-state"><div class="empty-icon">&#x1F4CB;</div><strong>Please select case details above</strong><br>Pick an offense type, available evidence, or accused status to generate your guide.</div>`;
+    return;
+  }
+
+  const catMeta = {
+    A: { label:'Category A', title:'Locate &amp; Trace', desc:'Identity is known. Goal: find the accused\'s current location using NATGRID data chain and execute action.', icon:'&#x1F4CD;' },
+    B: { label:'Category B', title:'Identify &amp; Arrest', desc:'Identity is unknown. Goal: establish WHO committed the crime using physical/digital evidence from the scene, then locate and arrest.', icon:'&#x1F50E;' },
+    C: { label:'Category C', title:'Financial &amp; Digital Trail', desc:'Money trail or cyber offense. Goal: follow the financial and digital footprint to build a complete court-ready evidence trail.', icon:'&#x1F4B0;' },
+  };
+  const m = catMeta[cat];
+
+  let steps = []; let sn = 1;
+
+  // ── STEP 1: FIR + CASE ID ──
+  let s1body = `<strong>Case ID format: AP-XXXXXXX</strong> — submit this with every NATGRID request. No Case ID = request rejected.<br><br>
+  ${caseId ? `<div class="tip success">&#x2714; Case ID entered: <strong>${caseId}</strong> — include this on all NATGRID submissions.</div>` : `<div class="tip warn">&#x26A0; Case ID not entered. Enter it above in the Case ID field before submitting NATGRID requests.</div>`}
+  ${off('missing','caw') ? tip('&#9888; Mark as <strong>PRIORITY</strong> for Crime Against Women and child cases — enables faster processing by IT Core Team.','priority') : ''}
+  ${off('murder') ? tip('&#9888; Murder case: submit NATGRID within <strong>1 hour</strong> of FIR registration — digital trails deteriorate fast.','warn') : ''}
+  ${off('missing') ? tip('&#9888; Missing persons: submit NATGRID within <strong>30 minutes</strong> of FIR — the golden hour applies to intelligence.','warn') : ''}`;
+  steps.push(makeStep(sn++, cat, 'Register FIR and obtain Case ID (AP-XXXXXXX)', [], s1body));
+
+  // ── STEP 2: COLLECT IDENTIFIERS ──
+  let s2body = `Collect every available input before submitting NATGRID requests:<br><br>`;
+  if (cat==='A') s2body += `<ul><li>Mobile numbers (active, inactive, or old — all usable in ER Search)</li><li>Full name and father's name as on FIR</li><li>Photograph (Aadhaar, social media, FIR records, court records)</li><li>PAN, Aadhaar, driving licence number</li><li>Vehicle registration number</li><li>Ration card / FPS details (obtain from local authorities when field team visits house)</li><li>Family member names and contacts</li></ul>`;
+  if (cat==='B') s2body += `<ul><li>CCTV footage from crime scene + surrounding roads + escape route</li><li>Vehicle registration number (partial plates like AP39XX are usable)</li><li>Clear photographs of suspect (CCTV still, social media, Aadhaar)</li><li>All phones found at or recovered from scene or accused at arrest</li><li>Confessed names and numbers from any arrested accused (call log, saved contacts, mediator's report)</li></ul>`;
+  if (cat==='C') s2body += `<ul><li>Every mobile number the accused used (WhatsApp-only, UPI-registered, calling number)</li><li>PAN number and bank account details</li><li>Email IDs and social media profile links or post URLs</li><li>UPI transaction reference numbers</li><li>IP addresses or platform post URLs</li></ul>`;
+  steps.push(makeStep(sn++, cat, 'Collect all available identifiers', [], s2body));
+
+  // ── ER SEARCH ──
+  if (ev('mobile') || ev('name') || ev('dl')) {
+    let body = `${tag('ER Search','blue')} Submit to IT Core Team with Case ID.<br><br>
+    <strong>Input:</strong> ${[ev('mobile')?'Mobile number':'', ev('name')?"Name + father's name":'', ev('dl')?'Driving licence number':''].filter(Boolean).join(' / ')}<br><br>
+    <strong>You will receive:</strong> Alternate numbers linked to the identity, current communication address, photograph from KYC, linked vehicles, PAN number.<br>
+    ${ev('mobile') ? tip('A switched-off or even a 10-year-old number still works — NATGRID queries telecom KYC records, not live SIM status. NBW data from 30 years ago is usable.') : ''}
+    ${ev('name') && !ev('mobile') ? tip("Provide full name and father's name exactly as on FIR. Also check DoFPD (Department of Food and Public Distribution) for ration card details — gives latest family location.") : ''}
+    ${off('niact') ? tip('In NI Act / cheque bounce cases: the mobile number printed on the cheque is usually the best ER Search starting point.','priority') : ''}`;
+    steps.push(makeStep(sn++, cat, 'ER Search — mobile / name / DL', [['ER Search','blue']], body));
+  }
+
+  // ── IMAGE SEARCH (GANDIVA) ──
+  if (ev('photo')) {
+    let body = `${tag('Image Search (Gandiva)','blue')} Upload the clearest available photograph.<br><br>
+    <strong>Accepts:</strong> Aadhaar photo, social media profile picture, CCTV still frame, old FIR photograph (even 30 years old), court records photo.<br><br>
+    <strong>You will receive:</strong> Matched name, mobile number, address, PAN, linked vehicle. AP cases show 91–100% match confidence.<br>
+    ${tip('Even a shaky or low-resolution CCTV frame can work. An 80%+ match is a valid starting lead — field verification then confirms or rules it out.')}
+    ${off('cyber','fraud') ? tip('For social media offenses: download the offending post, crop the profile picture to a clear front-facing frame. Run this in parallel with a 94 BNSS notice to the platform — do not wait for one before starting the other.','priority') : ''}
+    ${off('nbw') ? tip('Old FIR photos from as far back as 1992 have returned 90–98% confidence matches. Never assume an old NBW photograph is too degraded to use.','success') : ''}
+    ${tip('<strong>Record the match percentage in your case diary</strong> (e.g. "94.66% match from Telecom database") — this adds significant credibility in court proceedings.')}`;
+    steps.push(makeStep(sn++, cat, 'Image Search — Gandiva facial match', [['Gandiva','blue']], body));
+  }
+
+  // ── VEHICLE / FASTAG ──
+  if (ev('vehicle')) {
+    let body = `${tag('MoRTH / VAHAN','blue')} ${tag('NHAI FASTag','blue')} Submit vehicle registration number.<br><br>
+    <strong>MoRTH / VAHAN gives:</strong> Registered owner name, mobile number, current address. Even partial plates like AP39XX are usable.<br><br>
+    <strong>NHAI FASTag gives:</strong> Every toll plaza crossed with date, time, and direction of travel — maps the exact escape route after the crime.<br>
+    ${tip('If the registered owner says they sold the vehicle: immediately get the buyer\'s contact and run that through NATGRID as well. Do not stop at the first owner.','warn')}
+    ${off('accident') ? tip('For hit-and-run: combine FASTag toll data with CDR tower data for the same timeframe to definitively confirm where the accused went after the incident.','success') : ''}
+    ${off('fraud','niact') ? tip('FASTag bank account link connects vehicle movement directly to financial identity — valuable for vehicle-based fraud networks.') : ''}`;
+    steps.push(makeStep(sn++, cat, 'MoRTH + NHAI FASTag — vehicle trace', [['MoRTH','blue'],['FASTag','blue']], body));
+  }
+
+  // ── FAMILY / NPR ──
+  if (ev('family')) {
+    let body = `${tag('QR – NPR / RGI','blue')} Submit family member details via the QR-NPR module.<br><br>
+    <strong>You will receive:</strong> Latest registered mobile number and current address for each family member.<br>
+    ${tip('Run individual ER Searches on every returned family member phone number. Check their recent financial transactions and call history — accused often stay in contact with family.')}
+    ${tip('This is the fastest backup when all known phone numbers of the accused are switched off or disconnected.')}`;
+    steps.push(makeStep(sn++, cat, 'QR – NPR / RGI — family member lookup', [['QR–NPR','blue']], body));
+  }
+
+  // ── TOWER DUMP ──
+  if (ev('towerdump') || (cat==='B' && off('murder','theft'))) {
+    let body = `${tag('Tower Dump','teal')} ${tag('ER Search','teal')} Request tower dump from all towers covering the crime scene.<br><br>
+    <strong>Time window:</strong> Request 2-hour window around the incident time. This is your suspect pool.<br><br>
+    <strong>Process after receiving dump:</strong>
+    <ul><li>Cross-reference each suspicious number with NATGRID ER Search</li>
+    <li>Numbers present at crime scene at time of crime <strong>+</strong> communicated with each other = suspect pair</li>
+    <li>Check MO criminals in similar offense types — apply for their CDRs and match against tower dump</li></ul>
+    ${tip('Tower dump + NATGRID ER is the strongest combination when no eyewitness can identify the accused. It places specific phones at the scene at the time of crime.','success')}
+    ${off('murder') ? tip('For murder cases: build a visual call flow chart from the dump — calls made before and after the crime demonstrate planning and escape coordination in court.','priority') : ''}`;
+    steps.push(makeStep(sn++, cat, 'Tower dump → ER Search on suspicious numbers', [['Tower Dump','teal'],['ER Search','teal']], body));
+  }
+
+  // ── MEA PASSPORT + BOI ──
+  if (ev('passport') || st('abroad')) {
+    let body = `${tag('QR – MEA Passport','blue')} ${tag('QR – BOI Immigration','blue')} Run <strong>both</strong> — they answer different questions.<br><br>
+    <strong>MEA Passport:</strong> Confirms passport exists, returns issuance address, DOB, passport type.<br><br>
+    <strong>BOI Immigration:</strong> Returns every India entry and exit with date, port, and visa details.<br>
+    ${tip('<strong>BOI Immigration is the ONLY authoritative source</strong> for whether the accused has left India. Do not assume or conclude without running it.','warn')}
+    ${(off('fraud') || st('abroad')) ? tip('If BOI confirms the accused is abroad: initiate Red Notice via Bharatpol using the NATGRID passport data.','priority') : ''}
+    ${tip('If BOI shows NO recent exit — the accused is still in India. This prevents misdirected international manhunts (prevented in Cr.No.91/2024, YSR Kadapa).','success')}`;
+    steps.push(makeStep(sn++, cat, 'MEA Passport + BOI Immigration — confirm travel status', [['MEA','blue'],['BOI','blue']], body));
+  }
+
+  // ── CBDT / PAN ──
+  if (ev('pan') || off('ndps','fraud','niact') || cat==='C') {
+    let body = `${tag('QR – CBDT (PAN)','amber')} Submit PAN number (from NATGRID ER output, bank records, or complainant).<br><br>
+    <strong>You will receive:</strong> Income tax filings, linked bank accounts, registered financial address, property information.<br>
+    ${off('ndps') ? tip('For NDPS asset seizure: run PAN search to unlock bank accounts for seizure proceedings under Section 68-A NDPS Act. Document full chain: confession → number → ER → PAN → bank → asset seizure.','priority') : ''}
+    ${off('fraud','niact','cyber') ? tip('For high-value fraud: check financial transactions before and after the crime period to establish the money trail for court.') : ''}`;
+    steps.push(makeStep(sn++, cat, 'QR – CBDT — financial identity and asset tracing (PAN)', [['QR–CBDT','amber']], body));
+  }
+
+  // ── 94 BNSS / IP CHAIN ──
+  if (ev('ip') || off('cyber')) {
+    let body = `${tag('94 BNSS Notice','amber')} Issue to social media platform (Twitter/X, Facebook, Instagram, WhatsApp) for account registration details, IP logs, and login history.<br><br>
+    <strong>Complete chain after platform response:</strong><br>
+    IP address → Identify ISP (Jio / Airtel / BSNL) → Write to ISP for IPDR (IP Detail Record) → IPDR reveals device IMEI → Submit IMEI to CEIR → Get current mobile number → ER Search returns real name and address.<br>
+    ${tip('Run Image Search and 94 BNSS notice in parallel — do not wait for one before starting the other. Both take time and can independently confirm the same identity.','priority')}
+    ${tip('For Digital Arrest Fraud: obtain IP logs from payment platforms (Amazon Pay, Razorpay) and file 94 BNSS notices to them as well as the communication platform used.')}`;
+    steps.push(makeStep(sn++, cat, '94 BNSS notice → IP → ISP → IPDR → IMEI → ER chain', [['94 BNSS','amber'],['IPDR','amber']], body));
+  }
+
+  // ── BANK NOTICE ──
+  if (ev('bank') || (cat==='C' && off('fraud','niact'))) {
+    let body = `${tag('94 BNSS to Bank','amber')} Issue formal notice to the bank for complete transaction records. Simultaneously request account freeze to prevent further movement of funds.<br>
+    ${tip('Run CDR analysis and bank notice simultaneously — parallel actions save critical time in fraud cases.','priority')}
+    ${tip('UPI transaction reference numbers can be traced directly to the registered mobile number and account through the bank notice.')}
+    ${tip('FASTag bank account link is valuable in vehicle-based fraud — directly connects vehicle movement to financial identity.')}`;
+    steps.push(makeStep(sn++, cat, 'Bank account notice + account freeze', [['Bank Notice','amber']], body));
+  }
+
+  // ── CO-ACCUSED / NETWORK ──
+  if (ev('coaccused') || st('network')) {
+    let body = `${tag('ER Search','teal')} At the moment of A1 / A2 arrest: go through every number in the accused's phone — call log, saved contacts, voluntary statement, mediator's report.<br><br>
+    Run ER Search on every disclosed number. Even if an absconding accused switched SIM, the KYC record of the original number links to their identity.<br>
+    ${tip('<strong>In gang cases:</strong> run ALL recovered phones through NATGRID simultaneously to map the complete network. Never run sequentially — it wastes critical time.','warn')}
+    ${tip('Submit all linked numbers for CDR simultaneously to build a visual call flow chart. This demonstrates conspiracy and coordination in court.','success')}`;
+    steps.push(makeStep(sn++, cat, 'ER Search on all disclosed / co-accused numbers', [['ER Search','teal']], body));
+  }
+
+  // ── IMEI TRACKING ──
+  if (ev('imei') || (cat==='B' && !ev('mobile'))) {
+    let body = `${tag('IMEI Tracking','teal')} ${tag('CEIR','teal')} Submit IMEI to CDR unit and CEIR.<br><br>
+    IMEI survives SIM card changes. If the accused discards their SIM and uses a new one, the IMEI links the new number back to the same device and identity.<br>
+    ${tip('<strong>All numbers switched off is NOT a dead end.</strong> IMEI tracking and metadata analysis still work. Always request IMEI analysis from the CDR unit even for inactive numbers.','success')}
+    ${tip('Model case: Cr.No.108/2024, Koyyuru PS — A3 traced via IMEI after switching SIM, confirmed at 100% Gandiva match.','success')}`;
+    steps.push(makeStep(sn++, cat, 'IMEI tracking via CDR unit and CEIR', [['IMEI','teal'],['CEIR','teal']], body));
+  }
+
+  // ── CDR ANALYSIS (always) ──
+  let cdrBody = `${tag('CDR Analysis','teal')} ${tag('IMEI','teal')} Submit every number returned by NATGRID to the CDR unit.<br><br>
+  <strong>CDR reveals:</strong>
+  <ul><li>Last active tower location of the device</li><li>IMEI number (survives SIM changes — request even for inactive numbers)</li><li>B-party contacts who may know the accused's whereabouts</li><li>Tower sequence showing escape route after the crime</li></ul>
+  ${tip('Always request IMEI analysis from the CDR unit — most powerful tool when accused switch SIMs. It is never a dead end.','warn')}
+  ${off('murder') ? tip('For murder cases: build a visual call flow chart — calls made before and after the crime demonstrate planning and escape coordination in court.','priority') : ''}
+  ${tip('If ALL returned numbers are switched off: IMEI metadata analysis still works. Request it explicitly from the CDR unit.')}`;
+  steps.push(makeStep(sn++, cat, 'CDR + IMEI analysis on all returned numbers', [['CDR','teal'],['IMEI','teal']], cdrBody));
+
+  // ── INTER-STATE ──
+  if (cat==='B' || st('absconding') || st('network') || off('ndps','theft')) {
+    let body = `Many accused in AP cases originate from Karnataka, Maharashtra, Odisha, or Telangana.<br><br>
+    Share NATGRID-returned address with the local SP/SO of that state. Request surveillance assistance. A formal coordination letter with NATGRID data establishes seriousness and gets faster cooperation.<br>
+    ${off('ndps') ? tip('For NDPS: write formally to local SP with NATGRID address and PAN details. Document the letter reference in case diary.','priority') : ''}
+    ${tip('For inter-state cases: write formally to local SO/SP with Case ID and NATGRID data rather than making informal phone contact.')}`;
+    steps.push(makeStep(sn++, cat, 'Inter-state coordination (write to SP/SO)', [['Write to SP/SO','teal']], body));
+  }
+
+  // ── FIELD VERIFICATION ──
+  let fvBody = `Deploy field team to the communication address returned by NATGRID.<br><br>
+  ${off('caw') ? `${tag('Women Protection Cell','green')} Coordinate with Women Protection Cell for Crime Against Women cases.<br><br>` : ''}
+  <strong>Confirm identity using all three sources:</strong>
+  <ul><li>NATGRID photograph match</li><li>CDR tower confirmation at that location</li><li>Field enquiry from local contacts and neighbours</li></ul>
+  ${tip('<strong>Never arrest on NATGRID data alone.</strong> All three — NATGRID + CDR + field verification — must confirm identity before any action is taken.','warn')}
+  ${tip('For inter-state cases: write formally to local SO/SP with Case ID and NATGRID data. Always operate through official channels.')}`;
+  steps.push(makeStep(sn++, cat, 'Field verification at NATGRID address', [['Field Verify','green']], fvBody));
+
+  // ── FINAL ACTION ──
+  let faLabel = cat==='A' ? 'Trace / Execute Warrant / File Traced Report' : cat==='B' ? 'Arrest + Recover Property + Charge Sheet' : 'Legal Action + Financial Seizure + Charge Sheet';
+  let faBody = '';
+  if (cat==='A') faBody = `<ul><li>Match NATGRID photo + CDR tower + field enquiry before any action</li><li>Missing persons: file Traced Report in CCTNS after locating</li><li>NBW cases: execute warrant and produce accused before issuing court</li><li>Crime against women: issue 41A notice as applicable</li></ul>${tip('Document the full identification chain in the case diary with dates, match percentages, and module names.','success')}`;
+  if (cat==='B') faBody = `<ul><li>Arrest accused and simultaneously search premises for stolen property / contraband</li><li>Document full technical chain in arrest memo: CCTV → NATGRID → CDR → IMEI → tower location → field verification → arrest</li><li>This sequence forms the technical evidence narrative in the charge sheet</li></ul>${tip('For NDPS: the complete chain (co-accused confession → number → ER → alternate → CDR → IMEI → location → arrest) goes into the charge sheet as technical evidence.','success')}`;
+  if (cat==='C') faBody = `<ul><li>Compile complete narrative: complaint → accused mobile → NATGRID identity → PAN → bank account → CDR location → MEA/BOI confirmation → field verification</li><li>Each digital evidence link must be documented with dates in the case diary</li><li>Record Gandiva match percentage explicitly in charge sheet</li></ul>${tip('For high-value fraud with accused confirmed abroad: file Red Notice via Bharatpol alongside domestic charge sheet preparation.','priority')}`;
+  steps.push(makeStep(sn++, cat, faLabel, [['Final Action','green']], faBody));
+
+  // ── NATGRID FAILED FALLBACK ──
+  if (steps.length > 4) {
+    let fbBody = `If all NATGRID modules have been exhausted and the accused is still absconding:<br><br>
+    ${tag('Sudarshan — Social Media Cell','red')} Request via Social Media Cell when all standard NATGRID options are exhausted.<br><br>
+    <strong>What Sudarshan can return:</strong> New SIM discovered through deep-web analysis, family contact not in NPR, alternate digital address.<br>
+    ${tip('This is the last resort. Ensure all standard NATGRID modules (ER, Image Search, NPR, CDR+IMEI) have been exhausted before requesting Sudarshan.','warn')}`;
+    steps.push(makeStep(sn++, cat, 'Fallback — Sudarshan (if all NATGRID exhausted)', [['Sudarshan','red']], fbBody));
+  }
+
+  // ── BUILD OUTPUT ──
+  const evList = Array.from(state.ev).map(v => ({
+    mobile:'Mobile',name:'Name',photo:'Photograph',vehicle:'Vehicle',pan:'PAN',
+    passport:'Passport',family:'Family',ip:'IP/Social Media',bank:'Bank/UPI',
+    coaccused:'Co-Accused Numbers',dl:'Driving Licence',imei:'IMEI',towerdump:'Tower Dump'
+  }[v] || v));
+  const offList = Array.from(state.offense);
+  const stList = Array.from(state.status);
+  const pips = steps.map(() => `<div class="prog-pip ${cat}"></div>`).join('');
+
+  const summaryRows = [
+    offList.length ? `<div class="cs-row"><span class="cs-key">Offense</span><span class="cs-val">${offList.join(', ')}</span></div>` : '',
+    stList.length ? `<div class="cs-row"><span class="cs-key">Status</span><span class="cs-val">${stList.join(', ')}</span></div>` : '',
+    caseId ? `<div class="cs-row"><span class="cs-key">Case ID</span><span class="cs-val" style="font-weight:700;color:var(--blue-800)">${caseId}</span></div>` : `<div class="cs-row"><span class="cs-key">Case ID</span><span class="cs-val" style="color:var(--red-600)">Not entered</span></div>`,
+    `<div class="cs-row"><span class="cs-key">Category</span><span class="cs-val"><strong>${cat}</strong> — ${m.title.replace('&amp;','&')}</span></div>`,
+    `<div class="cs-row"><span class="cs-key">Steps</span><span class="cs-val">${steps.length} generated</span></div>`,
+    evList.length ? `<div style="margin-top:8px"><div class="cs-key" style="margin-bottom:5px;font-size:11px">Evidence available</div><div class="cs-tags">${evList.map(e=>`<span class="cs-tag">${e}</span>`).join('')}</div></div>` : '',
+  ].filter(Boolean).join('');
+
+  area.innerHTML = `
+  <div class="layout">
+    <div class="main-col">
+      <div class="cat-header ${cat}">
+        <div class="cat-icon">${m.icon}</div>
+        <div>
+          <div class="cat-badge badge-${cat}">${m.label}</div>
+          <div class="cat-title">${m.title}</div>
+          <div class="cat-desc">${m.desc}</div>
+        </div>
+      </div>
+      <div class="progress-bar">
+        ${pips}
+        <span class="prog-label">${steps.length} steps generated based on your inputs</span>
+      </div>
+      ${steps.join('')}
+      <div class="golden-rule">
+        <div class="gr-title">&#x25A0; Golden Rule — All Investigations</div>
+        <div class="gr-formula">NATGRID <span>+</span> CDR <span>+</span> Field Verification <span>=</span> ARREST</div>
+        <div class="gr-warn">&#x26A0; Never arrest on NATGRID data alone. All three must happen together.</div>
+        <div class="gr-steps">NATGRID gives the lead &nbsp;·&nbsp; CDR gives the location &nbsp;·&nbsp; Field verification enables the action</div>
+      </div>
+    </div>
+    <div class="side-col">
+      <div class="case-summary">
+        <h3>&#x1F4CB; Case Summary</h3>
+        ${summaryRows}
+      </div>
+    </div>
+  </div>`;
+
+  // Auto-open first step
+  const firstHeader = area.querySelector('.step-card-header');
+  if (firstHeader) {
+    firstHeader.nextElementSibling.classList.add('open');
+    firstHeader.querySelector('.chevron').classList.add('open');
+  }
+
+  area.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+function resetAll() {
+  state.offense.clear(); state.ev.clear(); state.status.clear();
+  document.querySelectorAll('.chip').forEach(c => c.className = 'chip');
+  document.getElementById('case-id-field').value = '';
+  document.getElementById('guide-area').innerHTML = `<div class="empty-state"><div class="empty-icon">&#x1F4CB;</div><strong>Select case details above and click "Generate Investigation Guide"</strong><br>The system will determine your investigation category and build a step-by-step NATGRID module sequence.<br><span style="font-size:12px;margin-top:8px;display:block">&#x2139; Tip: You can select multiple offenses and evidence types — the guide adapts to all combinations.</span></div>`;
+}
+</script>
+</body>
+</html>
