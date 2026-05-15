@@ -839,6 +839,186 @@ body{ font-family:var(--font-sans); background:var(--bg-app); color:var(--text-m
 body.sess-active .app-header{margin-top:29px;}
 @media print{#login-overlay,#sess-bar{display:none!important;}body.sess-active .app-header{margin-top:0!important;}}
 
+
+/* ══ DYNAMIC CASES — TOOLBAR ══ */
+.cases-toolbar {
+  background: var(--bg-card);
+  border: 1px solid var(--border-dim);
+  border-radius: 10px;
+  padding: 16px 20px;
+  margin-bottom: 22px;
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.cases-search-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.cases-search-wrap {
+  flex: 1;
+  position: relative;
+  max-width: 480px;
+}
+.cases-search-icon {
+  position: absolute;
+  left: 12px; top: 50%;
+  transform: translateY(-50%);
+  font-size: 14px;
+  color: var(--text-muted);
+  pointer-events: none;
+}
+.cases-search-input {
+  width: 100%;
+  padding: 10px 36px 10px 36px;
+  border: 1.5px solid var(--border-mid);
+  border-radius: 8px;
+  font-size: 13.5px;
+  font-family: var(--font-sans);
+  color: var(--text-main);
+  background: var(--bg-app);
+  outline: none;
+  transition: all 0.2s;
+}
+.cases-search-input:focus {
+  border-color: var(--saffron);
+  background: #fff;
+  box-shadow: 0 0 0 3px rgba(232,131,10,0.12);
+}
+.cases-search-clear {
+  position: absolute;
+  right: 10px; top: 50%;
+  transform: translateY(-50%);
+  background: none; border: none;
+  font-size: 14px; color: var(--text-muted);
+  cursor: pointer; padding: 2px 5px;
+  border-radius: 4px; display: none;
+  transition: color 0.15s;
+}
+.cases-search-clear:hover { color: var(--text-main); }
+.cases-search-clear.visible { display: block; }
+.cases-count-badge {
+  font-family: var(--font-mono);
+  font-size: 12px; font-weight: 700;
+  color: var(--text-muted);
+  white-space: nowrap;
+  margin-left: auto;
+}
+.cases-count-badge span { color: var(--saffron); }
+.cases-filter-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+  align-items: center;
+}
+.filter-label {
+  font-family: var(--font-mono);
+  font-size: 10px; font-weight: 700;
+  letter-spacing: 1.5px; text-transform: uppercase;
+  color: var(--text-muted); margin-right: 2px;
+}
+.filter-pill {
+  font-family: var(--font-mono);
+  font-size: 11.5px; font-weight: 700;
+  padding: 5px 13px;
+  border-radius: 20px;
+  border: 1.5px solid var(--border-mid);
+  background: var(--bg-app);
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: all 0.18s;
+  letter-spacing: 0.3px;
+}
+.filter-pill:hover { background: var(--bg-card); color: var(--text-main); border-color: #94a3b8; }
+.filter-pill.active-all { background: var(--bg-sidebar); color: #fff; border-color: var(--bg-sidebar); }
+.filter-pill.active-A   { background: var(--accent-cyan); color: #fff; border-color: var(--accent-cyan); }
+.filter-pill.active-B   { background: var(--accent-emerald); color: #fff; border-color: var(--accent-emerald); }
+.filter-pill.active-C   { background: var(--saffron); color: #fff; border-color: var(--saffron); }
+.filter-pill.active-convicted { background: #7c3aed; color: #fff; border-color: #7c3aed; }
+.filter-reset {
+  font-family: var(--font-mono);
+  font-size: 11px; font-weight: 700;
+  padding: 5px 11px;
+  border-radius: 20px;
+  border: 1.5px solid #fecaca;
+  background: #fff1f2; color: var(--accent-red);
+  cursor: pointer; transition: all 0.18s;
+  display: none;
+}
+.filter-reset.visible { display: inline-block; }
+.filter-reset:hover { background: #fee2e2; }
+
+/* ══ CASE STATES ══ */
+.cases-loading {
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  padding: 64px 24px; gap: 16px;
+}
+.cases-spinner {
+  width: 36px; height: 36px;
+  border: 3px solid var(--border-mid);
+  border-top-color: var(--saffron);
+  border-radius: 50%;
+  animation: cases-spin 0.8s linear infinite;
+}
+@keyframes cases-spin { to { transform: rotate(360deg); } }
+.cases-loading-text {
+  font-family: var(--font-mono); font-size: 13px;
+  color: var(--text-muted); letter-spacing: 0.5px;
+}
+.cases-error {
+  background: var(--bg-card); border: 1.5px solid #fecaca;
+  border-left: 4px solid var(--accent-red);
+  border-radius: 10px; padding: 28px 32px;
+  font-family: var(--font-sans); text-align: center;
+  box-shadow: var(--shadow-sm);
+}
+.cases-error-icon { font-size: 32px; margin-bottom: 12px; }
+.cases-error h3 { font-size: 16px; font-weight: 700; color: var(--accent-red); margin-bottom: 8px; }
+.cases-error p  { font-size: 13px; color: var(--text-muted); margin-bottom: 16px; line-height: 1.6; }
+.cases-retry-btn {
+  display: inline-flex; align-items: center; gap: 7px;
+  padding: 9px 20px; background: var(--bg-sidebar);
+  color: #fff; border: none; border-radius: 7px;
+  font-family: var(--font-mono); font-size: 12px;
+  font-weight: 700; letter-spacing: 0.5px;
+  cursor: pointer; transition: background 0.2s;
+}
+.cases-retry-btn:hover { background: #0a1622; }
+.cases-empty {
+  text-align: center; padding: 56px 24px;
+  background: var(--bg-card);
+  border: 1.5px dashed var(--border-mid);
+  border-radius: 10px;
+  font-family: var(--font-sans);
+}
+.cases-empty-icon { font-size: 36px; margin-bottom: 12px; opacity: 0.4; }
+.cases-empty h3 { font-size: 16px; font-weight: 600; color: var(--text-main); margin-bottom: 6px; }
+.cases-empty p  { font-size: 13px; color: var(--text-muted); }
+.cases-section-title {
+  font-size: 16px; font-weight: 700; color: var(--text-main);
+  margin: 0 0 14px; padding-bottom: 10px;
+  border-bottom: 2px solid var(--border-mid);
+  display: flex; align-items: center; gap: 10px;
+}
+.cases-section-wrap { margin-bottom: 36px; }
+.cases-meta {
+  font-family: var(--font-mono); font-size: 11px;
+  color: var(--text-muted); margin-bottom: 18px;
+  letter-spacing: 0.5px; display: flex;
+  justify-content: space-between; align-items: center;
+}
+/* Highlight matching search terms */
+mark.hl {
+  background: #fef08a;
+  color: #713f12;
+  border-radius: 2px;
+  padding: 0 2px;
+  font-style: normal;
+}
+
 </style>
 </head>
 <body>
@@ -1051,87 +1231,35 @@ body.sess-active .app-header{margin-top:29px;}
   <div class="tab-panel" id="tab-cases">
   <div class="cases-wrap">
 
-    <div class="ref-title" style="margin-bottom:14px">Category A — Locate &amp; Trace <span class="mini-badge mb-a" style="font-size:11px;vertical-align:middle">75+ AP Cases</span></div>
-    <div class="cases-grid">
-      <div class="case-card cat-a">
-        <div class="case-header"><div><div class="case-cr">Cr.No.219/2022 · Ganapavaram PS, Eluru</div><div class="case-ps">Missing Person — 4 Years</div></div><span class="case-cat cat-a-bg">CAT A</span></div>
-        <div class="case-offense">📍 Man missing 4 years. Family had given up hope. No digital history.</div>
-        <div class="case-what"><strong>What happened:</strong> IO ran ER Search on name alone. NATGRID returned Mumbai address and PAN. CDR confirmed he was active in Mumbai.</div>
-        <div class="case-result">✔ IO traveled to Mumbai. Found missing person working at a hotel. Reunited with family after 4 years.</div>
+    <!-- ── SEARCH & FILTER TOOLBAR ── -->
+    <div class="cases-toolbar" id="cases-toolbar" style="display:none">
+      <div class="cases-search-row">
+        <div class="cases-search-wrap">
+          <span class="cases-search-icon">&#128269;</span>
+          <input type="text" class="cases-search-input" id="cases-search-input"
+                 placeholder="Search by case no., PS, offense, result&#8230;"
+                 oninput="onCasesSearch(this.value)">
+          <button class="cases-search-clear" id="cases-search-clear"
+                  onclick="clearCasesSearch()" title="Clear search">&#10005;</button>
+        </div>
+        <div class="cases-count-badge" id="cases-count-badge"></div>
       </div>
-      <div class="case-card cat-a">
-        <div class="case-header"><div><div class="case-cr">Cr.Nos.52,53,54,21/1992 · Srikakulam II Town PS</div><div class="case-ps">NBW — 30+ Year Old Warrants (Dacoity)</div></div><span class="case-cat cat-a-bg">CAT A</span></div>
-        <div class="case-offense">📍 NBWs from 1992 pending. No digital history. Only old photographs.</div>
-        <div class="case-what"><strong>What happened:</strong> Old FIR photos uploaded to Gandiva Image Search. System returned matches and alternate numbers. CDR revealed current locations of all 4 accused.</div>
-        <div class="case-result">✔ All four accused traced. 30-year-old NBWs executed in 2025.</div>
-      </div>
-      <div class="case-card cat-a">
-        <div class="case-header"><div><div class="case-cr">Cr.No.48/2024 · Pakala PS, Tirupati</div><div class="case-ps">Crime Against Women — Accused Fled</div></div><span class="case-cat cat-a-bg">CAT A</span></div>
-        <div class="case-offense">📍 Only image available. No mobile number on record.</div>
-        <div class="case-what"><strong>What happened:</strong> Image uploaded to Gandiva. Father's name from match. MEA retrieved passport. BOI confirmed accused had returned to India.</div>
-        <div class="case-result">✔ 41A notice issued. Full chain: Image → MEA → BOI.</div>
-      </div>
-      <div class="case-card cat-a">
-        <div class="case-header"><div><div class="case-cr">Cr.No.82/2024 · Kaviti PS, Srikakulam</div><div class="case-ps">Road Accident — Hit &amp; Run</div></div><span class="case-cat cat-a-bg">CAT A</span></div>
-        <div class="case-offense">🚗 Vehicle details available. Driver fled after accident.</div>
-        <div class="case-what"><strong>What happened:</strong> FASTag and toll plaza data analyzed through NATGRID to track vehicle movement after accident.</div>
-        <div class="case-result">✔ Accused identified via FASTag-based route mapping and apprehended.</div>
+      <div class="cases-filter-row">
+        <span class="filter-label">Filter:</span>
+        <button class="filter-pill active-all" data-filter="all"   onclick="setCasesFilter('all',this)">All Cases</button>
+        <button class="filter-pill"            data-filter="A"     onclick="setCasesFilter('A',this)">&#128205; Cat A — Locate &amp; Trace</button>
+        <button class="filter-pill"            data-filter="B"     onclick="setCasesFilter('B',this)">&#128270; Cat B — Identify &amp; Arrest</button>
+        <button class="filter-pill"            data-filter="C"     onclick="setCasesFilter('C',this)">&#128176; Cat C — Financial &amp; Digital</button>
+        <button class="filter-pill"            data-filter="convicted" onclick="setCasesFilter('convicted',this)">&#9878; Convicted</button>
+        <button class="filter-reset" id="cases-filter-reset" onclick="resetCasesFilters()">&#10005; Reset</button>
       </div>
     </div>
 
-    <div class="ref-title" style="margin:28px 0 14px">Category B — Identify &amp; Arrest <span class="mini-badge mb-b" style="font-size:11px;vertical-align:middle">60+ AP Cases</span></div>
-    <div class="cases-grid">
-      <div class="case-card cat-b">
-        <div class="case-header"><div><div class="case-cr">Cr.No.23/2025 · Ulindakonda PS, Kurnool</div><div class="case-ps">ATM Robbery — Vehicle Tracked Across India ✅ CONVICTED</div></div><span class="case-cat cat-b-bg">CAT B</span></div>
-        <div class="case-offense">🚛 Container truck used to steal ATM. CCTV captured plate.</div>
-        <div class="case-what"><strong>What happened:</strong> MoRTH ID'd truck owner. NHAI FASTag mapped route: Amakatadu → Gooty → Maroor toll plazas northward. CDR + IMEI tracked driver to Hosur. All 4 arrested at Rajasthan dhaba.</div>
-        <div class="case-result convicted">⚖ CONVICTED 29.04.2025 · JMFC Kurnool · 3 yrs RI + Rs.14,000 fine each. NATGRID-to-conviction in 4 months.</div>
-      </div>
-      <div class="case-card cat-b">
-        <div class="case-header"><div><div class="case-cr">Cr.No.108/2024 · Koyyuru PS, Alluri Sitharamaraju</div><div class="case-ps">NDPS — A3 Traced via CDR IMEI Chain</div></div><span class="case-cat cat-b-bg">CAT B</span></div>
-        <div class="case-offense">💊 A4–A6 arrested, confessed A3's number. All numbers switched off.</div>
-        <div class="case-what"><strong>What happened:</strong> IMEI analysis found A3 had switched to new SIM. New number submitted for live location. Gandiva confirmed identity at 100% match.</div>
-        <div class="case-result">✔ A3 identified and arrested. Model case for IMEI-based tracing in NDPS.</div>
-      </div>
-      <div class="case-card cat-b">
-        <div class="case-header"><div><div class="case-cr">Cr.No.40/2025 · Chippagiri PS, Kurnool</div><div class="case-ps">Murder for Gain — Full Network via Vehicle</div></div><span class="case-cat cat-b-bg">CAT B</span></div>
-        <div class="case-offense">🚛 Ashok Leyland Tipper used. CCTV captured it.</div>
-        <div class="case-what"><strong>What happened:</strong> MoRTH returned owner. Owner disclosed sale to A7. ER Search returned photo + alternates. Tower dump cross-referenced with CDR. All accused identified.</div>
-        <div class="case-result">✔ Vehicle ownership chain established. All accused identified. Charge sheet filed.</div>
-      </div>
-      <div class="case-card cat-b">
-        <div class="case-header"><div><div class="case-cr">Cr.Nos.89,92/2023 · S. Kota PS, Vizianagaram</div><div class="case-ps">NDPS — Rs.42.7 Lakh Property Seized</div></div><span class="case-cat cat-b-bg">CAT B</span></div>
-        <div class="case-offense">💊 Odisha accused — photo uploaded to Gandiva. PAN returned.</div>
-        <div class="case-what"><strong>What happened:</strong> IO wrote to Income Tax, Odisha using NATGRID PAN. Financial investigation confirmed property from ganja trade.</div>
-        <div class="case-result">✔ Rs.42.7 lakh property seized — entirely through NATGRID-derived PAN data.</div>
-      </div>
-    </div>
-
-    <div class="ref-title" style="margin:28px 0 14px">Category C — Financial &amp; Digital Trail <span class="mini-badge mb-c" style="font-size:11px;vertical-align:middle">32+ AP Cases</span></div>
-    <div class="cases-grid">
-      <div class="case-card cat-c">
-        <div class="case-header"><div><div class="case-cr">Cr.No.41/2025 · Piduguralla PS, Palnadu</div><div class="case-ps">Rs.35–40 Crore Cheating — Accused in Dubai</div></div><span class="case-cat cat-c-bg">CAT C</span></div>
-        <div class="case-offense">💰 Accused fled to Dubai after massive fraud.</div>
-        <div class="case-what"><strong>What happened:</strong> IO used NATGRID with phone, passport, PAN, email. MEA confirmed passport. BOI returned exit to Dubai. Financial trail documented.</div>
-        <div class="case-result">✔ Confirmed in Dubai. Red Notice via Bharatpol initiated using NATGRID passport data.</div>
-      </div>
-      <div class="case-card cat-c">
-        <div class="case-header"><div><div class="case-cr">Cr.Nos.194,297,138/2025 · West Godavari (3 PSs)</div><div class="case-ps">Digital Arrest Fraud — Rs.12L Extorted (14 Accused)</div></div><span class="case-cat cat-c-bg">CAT C</span></div>
-        <div class="case-offense">📱 Fraudsters posed as Supreme Court officials. Rs.12 lakh extorted.</div>
-        <div class="case-what"><strong>What happened:</strong> IP logs from Amazon Pay → 94 BNSS notice → Jio IPDR → IMEI → ER Search. Full network A1–A14 mapped.</div>
-        <div class="case-result">✔ All 14 accused arrested and remanded using NATGRID-derived data.</div>
-      </div>
-      <div class="case-card cat-c">
-        <div class="case-header"><div><div class="case-cr">Cr.No.91/2024 · Chinna Chowk PS, YSR Kadapa</div><div class="case-ps">Cheating — Accused Confirmed Still in India</div></div><span class="case-cat cat-c-bg">CAT C</span></div>
-        <div class="case-offense">💰 Accused suspected to have fled abroad.</div>
-        <div class="case-what"><strong>What happened:</strong> MEA confirmed passport. BOI showed NO recent exit. CBDT returned financial address. Accused confirmed still in India.</div>
-        <div class="case-result">✔ Arrested using NATGRID address. Misdirected international manhunt avoided.</div>
-      </div>
-      <div class="case-card cat-c">
-        <div class="case-header"><div><div class="case-cr">Cr.No.386/2024 · Krishnalanka PS, NTR</div><div class="case-ps">Online Abusive Content — ID'd from One Photo</div></div><span class="case-cat cat-c-bg">CAT C</span></div>
-        <div class="case-offense">📱 Only a social media profile image available.</div>
-        <div class="case-what"><strong>What happened:</strong> IO uploaded profile photo to Gandiva. System returned phone number and colony address. Identity confirmed via field verification.</div>
-        <div class="case-result">✔ Accused identified within hours. Legal action within 24 hours — one photograph.</div>
+    <!-- ── DYNAMIC CONTENT ── -->
+    <div id="dynamic-cases-container">
+      <div class="cases-loading">
+        <div class="cases-spinner"></div>
+        <div class="cases-loading-text">Loading cases from GitHub&#8230;</div>
       </div>
     </div>
 
@@ -1756,6 +1884,9 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  // Load real cases dynamically from GitHub
+  fetchRealCases();
+
   // Check for existing valid session
   const sess = getSession();
   if (sess && sess.expires > Date.now()) {
@@ -1771,6 +1902,235 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 });
+
+
+/* ════ DYNAMIC CASES LOADER ════ */
+
+/* ═══════════════════════════════════════════════
+   CASES ENGINE — unlimited + searchable
+═══════════════════════════════════════════════ */
+const CASES_URL = 'https://raw.githubusercontent.com/aptechserv-ux/GANDIVA-Guide/main/cases.json';
+
+const CAT_META = {
+  A: { label:'Category A — Locate & Trace',        badgeClass:'mb-a', cardClass:'cat-a', bgClass:'cat-a-bg', tag:'CAT A' },
+  B: { label:'Category B — Identify & Arrest',     badgeClass:'mb-b', cardClass:'cat-b', bgClass:'cat-b-bg', tag:'CAT B' },
+  C: { label:'Category C — Financial & Digital Trail', badgeClass:'mb-c', cardClass:'cat-c', bgClass:'cat-c-bg', tag:'CAT C' }
+};
+
+// ── In-memory store ──
+let _allCases     = [];
+let _catMetaMap   = {};
+let _updatedDate  = '';
+let _activeFilter = 'all';
+let _searchQuery  = '';
+let _searchTimer  = null;
+
+// ── Utilities ──
+function escHtml(str) {
+  if (!str) return '';
+  return String(str).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+function highlightText(text, query) {
+  if (!query) return escHtml(text);
+  const safe  = escHtml(text);
+  const safeQ = query.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  return safe.replace(new RegExp(`(${safeQ})`, 'gi'), '<mark class="hl">$1</mark>');
+}
+
+function matchesSearch(c, q) {
+  if (!q) return true;
+  const lower = q.toLowerCase();
+  return [c.cr_number, c.case_title, c.offense, c.what_happened, c.result]
+    .some(f => f && String(f).toLowerCase().includes(lower));
+}
+
+// ── Build a single card ──
+function buildCaseCard(c, query, forceShowCat) {
+  const cat    = (c.category || 'A').toUpperCase();
+  const meta   = CAT_META[cat] || CAT_META.A;
+  const resClass = c.convicted ? 'case-result convicted' : 'case-result';
+  const resIcon  = c.convicted ? '⚖' : '✔';
+  const hl = t => highlightText(t, query);
+
+  return `<div class="case-card ${meta.cardClass}">
+    <div class="case-header">
+      <div>
+        <div class="case-cr">${hl(c.cr_number)}</div>
+        <div class="case-ps">${hl(c.case_title)}</div>
+      </div>
+      <span class="case-cat ${meta.bgClass}">${meta.tag}</span>
+    </div>
+    <div class="case-offense">${hl(c.offense)}</div>
+    <div class="case-what"><strong>What happened:</strong> ${hl(c.what_happened)}</div>
+    <div class="${resClass}">${resIcon} ${hl(c.result)}</div>
+  </div>`;
+}
+
+// ── Build a grouped section (used when not searching) ──
+function buildSection(cat, cases, query) {
+  const meta      = CAT_META[cat] || CAT_META.A;
+  const catData   = _catMetaMap[cat];
+  const badgeHtml = catData
+    ? `<span class="mini-badge ${meta.badgeClass}" style="font-size:11px;vertical-align:middle">${escHtml(catData.badge)}</span>`
+    : '';
+  return `<div class="cases-section-wrap">
+    <div class="cases-section-title">${escHtml(meta.label)} ${badgeHtml}</div>
+    <div class="cases-grid">${cases.map(c => buildCaseCard(c, query)).join('')}</div>
+  </div>`;
+}
+
+// ── Master render function ──
+function renderCases() {
+  const container = document.getElementById('dynamic-cases-container');
+  if (!container) return;
+
+  const q    = _searchQuery.trim();
+  const filt = _activeFilter;
+
+  // Filter step 1: category / convicted
+  let filtered = _allCases.filter(c => c.active !== false);
+  if (filt === 'convicted')  filtered = filtered.filter(c => c.convicted);
+  else if (filt !== 'all')   filtered = filtered.filter(c => (c.category||'A').toUpperCase() === filt);
+
+  // Filter step 2: search query
+  const visible = filtered.filter(c => matchesSearch(c, q));
+
+  // Update count badge
+  const badge = document.getElementById('cases-count-badge');
+  if (badge) {
+    const total = _allCases.filter(c => c.active !== false).length;
+    badge.innerHTML = `Showing <span>${visible.length}</span> of <span>${total}</span> case${total !== 1 ? 's' : ''}`;
+  }
+
+  // Update clear / reset button visibility
+  const clearBtn  = document.getElementById('cases-search-clear');
+  const resetBtn  = document.getElementById('cases-filter-reset');
+  if (clearBtn) clearBtn.classList.toggle('visible', q.length > 0);
+  if (resetBtn) resetBtn.classList.toggle('visible', q.length > 0 || filt !== 'all');
+
+  // ── Empty state ──
+  if (visible.length === 0) {
+    container.innerHTML = `<div class="cases-empty">
+      <div class="cases-empty-icon">&#128269;</div>
+      <h3>No cases found</h3>
+      <p>No cases match "${escHtml(q)}"${filt !== 'all' ? ` in the selected category` : ''}.<br>
+         Try a different search term or <button onclick="resetCasesFilters()" style="background:none;border:none;color:var(--saffron);font-weight:700;cursor:pointer;font-size:13px">reset filters</button>.</p>
+    </div>`;
+    return;
+  }
+
+  // ── Meta header ──
+  const metaHtml = _updatedDate
+    ? `<div class="cases-meta">
+         <span>${visible.length} case${visible.length !== 1 ? 's' : ''} shown</span>
+         <span>Last updated: ${escHtml(_updatedDate)}</span>
+       </div>`
+    : '';
+
+  // ── Grouped view (no search + filter = all or single cat) ──
+  const useGrouped = !q && (filt === 'all' || filt === 'A' || filt === 'B' || filt === 'C');
+  if (useGrouped) {
+    const groups = { A:[], B:[], C:[] };
+    visible.forEach(c => { const cat=(c.category||'A').toUpperCase(); if(groups[cat]) groups[cat].push(c); });
+    const sectionsHtml = ['A','B','C']
+      .filter(cat => groups[cat].length > 0)
+      .map(cat => buildSection(cat, groups[cat], q))
+      .join('');
+    container.innerHTML = metaHtml + sectionsHtml;
+    return;
+  }
+
+  // ── Flat view (searching or convicted filter) ──
+  const flatTitle = q
+    ? `<div class="cases-section-title">Search results for "<em>${escHtml(q)}</em>"</div>`
+    : `<div class="cases-section-title">&#9878; Convicted Cases</div>`;
+  const cards = visible.map(c => buildCaseCard(c, q)).join('');
+  container.innerHTML = `${metaHtml}${flatTitle}<div class="cases-grid">${cards}</div>`;
+}
+
+// ── Search handler (debounced 250 ms) ──
+function onCasesSearch(val) {
+  clearTimeout(_searchTimer);
+  _searchTimer = setTimeout(() => {
+    _searchQuery = val;
+    renderCases();
+  }, 250);
+}
+
+function clearCasesSearch() {
+  const inp = document.getElementById('cases-search-input');
+  if (inp) inp.value = '';
+  _searchQuery = '';
+  renderCases();
+}
+
+// ── Filter pill handler ──
+function setCasesFilter(filter, btn) {
+  _activeFilter = filter;
+  document.querySelectorAll('.filter-pill').forEach(p => {
+    p.className = 'filter-pill';          // strip all active-* classes
+  });
+  if (btn) btn.classList.add(`active-${filter}`);
+  renderCases();
+}
+
+// ── Reset everything ──
+function resetCasesFilters() {
+  _activeFilter = 'all';
+  _searchQuery  = '';
+  const inp = document.getElementById('cases-search-input');
+  if (inp) inp.value = '';
+  document.querySelectorAll('.filter-pill').forEach(p => p.className = 'filter-pill');
+  const allPill = document.querySelector('.filter-pill[data-filter="all"]');
+  if (allPill) allPill.classList.add('active-all');
+  renderCases();
+}
+
+// ── Fetch from GitHub ──
+async function fetchRealCases() {
+  const container = document.getElementById('dynamic-cases-container');
+  const toolbar   = document.getElementById('cases-toolbar');
+  if (!container) return;
+
+  container.innerHTML = `<div class="cases-loading">
+    <div class="cases-spinner"></div>
+    <div class="cases-loading-text">Loading cases from GitHub…</div>
+  </div>`;
+  if (toolbar) toolbar.style.display = 'none';
+
+  try {
+    const res = await fetch(`${CASES_URL}?t=${Date.now()}`, {
+      cache: 'no-store', headers: { Accept: 'application/json' }
+    });
+    if (!res.ok) throw new Error(`GitHub returned HTTP ${res.status} — verify cases.json exists in the repo.`);
+
+    const data = await res.json();
+    if (!data.cases || !Array.isArray(data.cases))
+      throw new Error('Invalid JSON: expected a "cases" array at the top level.');
+
+    // Store everything in memory
+    _allCases    = data.cases;
+    _updatedDate = data.updated || '';
+    _catMetaMap  = {};
+    if (Array.isArray(data.categories))
+      data.categories.forEach(ct => { _catMetaMap[ct.id] = ct; });
+
+    // Show toolbar and render
+    if (toolbar) toolbar.style.display = '';
+    renderCases();
+
+  } catch (err) {
+    if (toolbar) toolbar.style.display = 'none';
+    container.innerHTML = `<div class="cases-error">
+      <div class="cases-error-icon">⚠️</div>
+      <h3>Could not load cases</h3>
+      <p>${escHtml(err.message)}<br>Check your internet connection or verify
+         <code>cases.json</code> is present in the GitHub repository.</p>
+      <button class="cases-retry-btn" onclick="fetchRealCases()">↺ &nbsp; Retry</button>
+    </div>`;
+  }
+}
 
 </script>
 </body>

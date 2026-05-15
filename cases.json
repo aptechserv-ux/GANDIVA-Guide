@@ -1,0 +1,156 @@
+{
+  "version": 1,
+  "updated": "2025-05-15",
+  "note": "Upload this file to the root of the aptechserv-ux/GANDIVA-Guide repo. Add new cases by appending to the 'cases' array. Change 'active' to false to hide a case without deleting it.",
+  "categories": [
+    {
+      "id": "A",
+      "label": "Category A — Locate & Trace",
+      "badge": "75+ AP Cases"
+    },
+    {
+      "id": "B",
+      "label": "Category B — Identify & Arrest",
+      "badge": "60+ AP Cases"
+    },
+    {
+      "id": "C",
+      "label": "Category C — Financial & Digital Trail",
+      "badge": "32+ AP Cases"
+    }
+  ],
+  "cases": [
+    {
+      "id": "CR-219-2022",
+      "category": "A",
+      "active": true,
+      "cr_number": "Cr.No.219/2022 · Ganapavaram PS, Eluru",
+      "case_title": "Missing Person — 4 Years",
+      "offense": "📍 Man missing 4 years. Family had given up hope. No digital history.",
+      "what_happened": "IO ran ER Search on name alone. NATGRID returned Mumbai address and PAN. CDR confirmed he was active in Mumbai.",
+      "result": "IO traveled to Mumbai. Found missing person working at a hotel. Reunited with family after 4 years.",
+      "convicted": false
+    },
+    {
+      "id": "CR-52-1992",
+      "category": "A",
+      "active": true,
+      "cr_number": "Cr.Nos.52,53,54,21/1992 · Srikakulam II Town PS",
+      "case_title": "NBW — 30+ Year Old Warrants (Dacoity)",
+      "offense": "📍 NBWs from 1992 pending. No digital history. Only old photographs.",
+      "what_happened": "Old FIR photos uploaded to Gandiva Image Search. System returned matches and alternate numbers. CDR revealed current locations of all 4 accused.",
+      "result": "All four accused traced. 30-year-old NBWs executed in 2025.",
+      "convicted": false
+    },
+    {
+      "id": "CR-48-2024",
+      "category": "A",
+      "active": true,
+      "cr_number": "Cr.No.48/2024 · Pakala PS, Tirupati",
+      "case_title": "Crime Against Women — Accused Fled",
+      "offense": "📍 Only image available. No mobile number on record.",
+      "what_happened": "Image uploaded to Gandiva. Father's name from match. MEA retrieved passport. BOI confirmed accused had returned to India.",
+      "result": "41A notice issued. Full chain: Image → MEA → BOI.",
+      "convicted": false
+    },
+    {
+      "id": "CR-82-2024",
+      "category": "A",
+      "active": true,
+      "cr_number": "Cr.No.82/2024 · Kaviti PS, Srikakulam",
+      "case_title": "Road Accident — Hit & Run",
+      "offense": "🚗 Vehicle details available. Driver fled after accident.",
+      "what_happened": "FASTag and toll plaza data analyzed through NATGRID to track vehicle movement after accident.",
+      "result": "Accused identified via FASTag-based route mapping and apprehended.",
+      "convicted": false
+    },
+    {
+      "id": "CR-23-2025",
+      "category": "B",
+      "active": true,
+      "cr_number": "Cr.No.23/2025 · Ulindakonda PS, Kurnool",
+      "case_title": "ATM Robbery — Vehicle Tracked Across India ✅ CONVICTED",
+      "offense": "🚛 Container truck used to steal ATM. CCTV captured plate.",
+      "what_happened": "MoRTH ID'd truck owner. NHAI FASTag mapped route: Amakatadu → Gooty → Maroor toll plazas northward. CDR + IMEI tracked driver to Hosur. All 4 arrested at Rajasthan dhaba.",
+      "result": "CONVICTED 29.04.2025 · JMFC Kurnool · 3 yrs RI + Rs.14,000 fine each. NATGRID-to-conviction in 4 months.",
+      "convicted": true
+    },
+    {
+      "id": "CR-108-2024",
+      "category": "B",
+      "active": true,
+      "cr_number": "Cr.No.108/2024 · Koyyuru PS, Alluri Sitharamaraju",
+      "case_title": "NDPS — A3 Traced via CDR IMEI Chain",
+      "offense": "💊 A4–A6 arrested, confessed A3's number. All numbers switched off.",
+      "what_happened": "IMEI analysis found A3 had switched to new SIM. New number submitted for live location. Gandiva confirmed identity at 100% match.",
+      "result": "A3 identified and arrested. Model case for IMEI-based tracing in NDPS.",
+      "convicted": false
+    },
+    {
+      "id": "CR-40-2025",
+      "category": "B",
+      "active": true,
+      "cr_number": "Cr.No.40/2025 · Chippagiri PS, Kurnool",
+      "case_title": "Murder for Gain — Full Network via Vehicle",
+      "offense": "🚛 Ashok Leyland Tipper used. CCTV captured it.",
+      "what_happened": "MoRTH returned owner. Owner disclosed sale to A7. ER Search returned photo + alternates. Tower dump cross-referenced with CDR. All accused identified.",
+      "result": "Vehicle ownership chain established. All accused identified. Charge sheet filed.",
+      "convicted": false
+    },
+    {
+      "id": "CR-89-2023",
+      "category": "B",
+      "active": true,
+      "cr_number": "Cr.Nos.89,92/2023 · S. Kota PS, Vizianagaram",
+      "case_title": "NDPS — Rs.42.7 Lakh Property Seized",
+      "offense": "💊 Odisha accused — photo uploaded to Gandiva. PAN returned.",
+      "what_happened": "IO wrote to Income Tax, Odisha using NATGRID PAN. Financial investigation confirmed property from ganja trade.",
+      "result": "Rs.42.7 lakh property seized — entirely through NATGRID-derived PAN data.",
+      "convicted": false
+    },
+    {
+      "id": "CR-41-2025",
+      "category": "C",
+      "active": true,
+      "cr_number": "Cr.No.41/2025 · Piduguralla PS, Palnadu",
+      "case_title": "Rs.35–40 Crore Cheating — Accused in Dubai",
+      "offense": "💰 Accused fled to Dubai after massive fraud.",
+      "what_happened": "IO used NATGRID with phone, passport, PAN, email. MEA confirmed passport. BOI returned exit to Dubai. Financial trail documented.",
+      "result": "Confirmed in Dubai. Red Notice via Bharatpol initiated using NATGRID passport data.",
+      "convicted": false
+    },
+    {
+      "id": "CR-194-2025",
+      "category": "C",
+      "active": true,
+      "cr_number": "Cr.Nos.194,297,138/2025 · West Godavari (3 PSs)",
+      "case_title": "Digital Arrest Fraud — Rs.12L Extorted (14 Accused)",
+      "offense": "📱 Fraudsters posed as Supreme Court officials. Rs.12 lakh extorted.",
+      "what_happened": "IP logs from Amazon Pay → 94 BNSS notice → Jio IPDR → IMEI → ER Search. Full network A1–A14 mapped.",
+      "result": "All 14 accused arrested and remanded using NATGRID-derived data.",
+      "convicted": false
+    },
+    {
+      "id": "CR-91-2024",
+      "category": "C",
+      "active": true,
+      "cr_number": "Cr.No.91/2024 · Chinna Chowk PS, YSR Kadapa",
+      "case_title": "Cheating — Accused Confirmed Still in India",
+      "offense": "💰 Accused suspected to have fled abroad.",
+      "what_happened": "MEA confirmed passport. BOI showed NO recent exit. CBDT returned financial address. Accused confirmed still in India.",
+      "result": "Arrested using NATGRID address. Misdirected international manhunt avoided.",
+      "convicted": false
+    },
+    {
+      "id": "CR-386-2024",
+      "category": "C",
+      "active": true,
+      "cr_number": "Cr.No.386/2024 · Krishnalanka PS, NTR",
+      "case_title": "Online Abusive Content — ID'd from One Photo",
+      "offense": "📱 Only a social media profile image available.",
+      "what_happened": "IO uploaded profile photo to Gandiva. System returned phone number and colony address. Identity confirmed via field verification.",
+      "result": "Accused identified within hours. Legal action within 24 hours — one photograph.",
+      "convicted": false
+    }
+  ]
+}
