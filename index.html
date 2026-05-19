@@ -1019,6 +1019,95 @@ mark.hl {
   font-style: normal;
 }
 
+
+/* ══════════════════════════════
+   CASES TAB — natgrid_success_stories
+══════════════════════════════ */
+
+/* Loading / error / empty states */
+.cases-loading{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:64px 24px;gap:16px;}
+.cases-spinner{width:36px;height:36px;border:3px solid var(--border-mid);border-top-color:var(--saffron);border-radius:50%;animation:cases-spin .8s linear infinite;}
+@keyframes cases-spin{to{transform:rotate(360deg)}}
+.cases-loading-text{font-family:var(--font-mono);font-size:13px;color:var(--text-muted);letter-spacing:.5px;}
+.cases-error{background:var(--bg-card);border:1.5px solid #fecaca;border-left:4px solid var(--accent-red);border-radius:10px;padding:28px 32px;text-align:center;box-shadow:var(--shadow-sm);}
+.cases-error-icon{font-size:32px;margin-bottom:12px;}
+.cases-error h3{font-size:16px;font-weight:700;color:var(--accent-red);margin-bottom:8px;}
+.cases-error p{font-size:13px;color:var(--text-muted);margin-bottom:16px;line-height:1.6;}
+.cases-retry-btn{display:inline-flex;align-items:center;gap:7px;padding:9px 20px;background:var(--bg-sidebar);color:#fff;border:none;border-radius:7px;font-family:var(--font-mono);font-size:12px;font-weight:700;letter-spacing:.5px;cursor:pointer;transition:background .2s;}
+.cases-retry-btn:hover{background:#0a1622;}
+.cases-empty{text-align:center;padding:56px 24px;background:var(--bg-card);border:1.5px dashed var(--border-mid);border-radius:10px;}
+.cases-empty-icon{font-size:36px;margin-bottom:12px;opacity:.4;}
+.cases-empty h3{font-size:16px;font-weight:600;color:var(--text-main);margin-bottom:6px;}
+.cases-empty p{font-size:13px;color:var(--text-muted);}
+
+/* Toolbar */
+.cases-toolbar{background:var(--bg-card);border:1px solid var(--border-dim);border-radius:10px;padding:16px 20px;margin-bottom:22px;box-shadow:var(--shadow-sm);display:flex;flex-direction:column;gap:12px;}
+.cases-search-row{display:flex;align-items:center;gap:10px;}
+.cases-search-wrap{flex:1;position:relative;max-width:480px;}
+.cases-search-icon{position:absolute;left:12px;top:50%;transform:translateY(-50%);font-size:14px;color:var(--text-muted);pointer-events:none;}
+.cases-search-input{width:100%;padding:10px 36px;border:1.5px solid var(--border-mid);border-radius:8px;font-size:13.5px;font-family:var(--font-sans);color:var(--text-main);background:var(--bg-app);outline:none;transition:all .2s;}
+.cases-search-input:focus{border-color:var(--saffron);background:#fff;box-shadow:0 0 0 3px rgba(232,131,10,.12);}
+.cases-search-clear{position:absolute;right:10px;top:50%;transform:translateY(-50%);background:none;border:none;font-size:14px;color:var(--text-muted);cursor:pointer;padding:2px 5px;border-radius:4px;display:none;transition:color .15s;}
+.cases-search-clear:hover{color:var(--text-main);}
+.cases-search-clear.visible{display:block;}
+.cases-count-badge{font-family:var(--font-mono);font-size:12px;font-weight:700;color:var(--text-muted);white-space:nowrap;margin-left:auto;}
+.cases-count-badge span{color:var(--saffron);}
+
+/* Filter rows */
+.filter-row{display:flex;flex-wrap:wrap;gap:6px;align-items:center;}
+.filter-label{font-family:var(--font-mono);font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--text-muted);margin-right:2px;}
+.filter-pill{font-family:var(--font-mono);font-size:11.5px;font-weight:700;padding:5px 13px;border-radius:20px;border:1.5px solid var(--border-mid);background:var(--bg-app);color:var(--text-muted);cursor:pointer;transition:all .18s;letter-spacing:.3px;}
+.filter-pill:hover{background:var(--bg-card);color:var(--text-main);border-color:#94a3b8;}
+.filter-pill.fp-active{background:var(--bg-sidebar);color:#fff;border-color:var(--bg-sidebar);}
+.filter-pill.fp-er    {background:var(--accent-cyan);color:#fff;border-color:var(--accent-cyan);}
+.filter-pill.fp-img   {background:var(--accent-emerald);color:#fff;border-color:var(--accent-emerald);}
+.filter-pill.fp-qr    {background:var(--saffron);color:#fff;border-color:var(--saffron);}
+.filter-pill.fp-sud   {background:#7c3aed;color:#fff;border-color:#7c3aed;}
+.filter-pill.fp-dist  {background:var(--navy);color:#fff;border-color:var(--navy);}
+.filter-sep{width:1px;height:20px;background:var(--border-mid);margin:0 4px;flex-shrink:0;}
+.filter-reset{font-family:var(--font-mono);font-size:11px;font-weight:700;padding:5px 11px;border-radius:20px;border:1.5px solid #fecaca;background:#fff1f2;color:var(--accent-red);cursor:pointer;transition:all .18s;display:none;}
+.filter-reset.visible{display:inline-block;}
+.filter-reset:hover{background:#fee2e2;}
+
+/* Section headers */
+.cases-section-wrap{margin-bottom:36px;}
+.cases-section-title{font-size:16px;font-weight:700;color:var(--text-main);margin:0 0 14px;padding-bottom:10px;border-bottom:2px solid var(--border-mid);display:flex;align-items:center;gap:10px;}
+.cases-meta{font-family:var(--font-mono);font-size:11px;color:var(--text-muted);margin-bottom:18px;letter-spacing:.5px;display:flex;justify-content:space-between;align-items:center;}
+
+/* Case card — natgrid_success_stories format */
+.sc-card{background:var(--bg-card);border:1px solid var(--border-dim);border-radius:10px;overflow:hidden;box-shadow:var(--shadow-sm);transition:box-shadow .2s,transform .2s;}
+.sc-card:hover{box-shadow:var(--shadow-md);transform:translateY(-2px);}
+.sc-head{padding:12px 16px;background:var(--bg-app);border-bottom:1px solid var(--border-dim);}
+.sc-top{display:flex;align-items:flex-start;justify-content:space-between;gap:8px;margin-bottom:5px;}
+.sc-fir{font-family:var(--font-mono);font-size:12px;font-weight:700;color:var(--navy);flex:1;line-height:1.4;}
+.sc-natid{font-family:var(--font-mono);font-size:10px;font-weight:700;color:var(--saffron);background:rgba(232,131,10,.1);border:1px solid rgba(232,131,10,.25);border-radius:4px;padding:2px 7px;white-space:nowrap;flex-shrink:0;}
+.sc-loc{font-size:12.5px;color:var(--text-muted);font-weight:500;}
+.sc-loc strong{font-weight:700;color:var(--text-main);}
+.sc-body{padding:12px 16px 14px;}
+.sc-offense{font-size:13px;font-weight:600;color:var(--text-main);line-height:1.5;padding-bottom:10px;border-bottom:1px solid var(--border-dim);margin-bottom:10px;}
+.sc-tags{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:10px;align-items:center;}
+.sc-mod{font-family:var(--font-mono);font-size:10px;font-weight:800;padding:3px 8px;border-radius:4px;text-transform:uppercase;letter-spacing:.3px;}
+.sc-mod-er  {background:var(--accent-cyan-dim);color:var(--accent-cyan);border:1px solid rgba(2,132,199,.2);}
+.sc-mod-img {background:var(--accent-emerald-dim);color:var(--accent-emerald);border:1px solid rgba(4,120,87,.2);}
+.sc-mod-qr  {background:var(--saffron-dim);color:var(--saffron);border:1px solid rgba(232,131,10,.25);}
+.sc-mod-sud {background:rgba(124,58,237,.1);color:#7c3aed;border:1px solid rgba(124,58,237,.2);}
+.sc-mod-oth {background:var(--bg-app);color:var(--text-muted);border:1px solid var(--border-mid);}
+.sc-src{font-family:var(--font-mono);font-size:10px;color:var(--text-muted);background:var(--bg-app);border:1px solid var(--border-dim);border-radius:4px;padding:2px 7px;}
+.sc-sep{font-family:var(--font-mono);font-size:10px;color:var(--border-mid);}
+.sc-io{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px;}
+.sc-io-box{background:var(--bg-app);border-radius:6px;padding:8px 10px;border:1px solid var(--border-dim);}
+.sc-io-lbl{font-family:var(--font-mono);font-size:9.5px;font-weight:800;letter-spacing:1px;text-transform:uppercase;color:var(--text-muted);margin-bottom:4px;}
+.sc-io-val{font-size:12px;color:var(--text-main);line-height:1.5;}
+.sc-summ-lbl{font-family:var(--font-mono);font-size:9.5px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;color:var(--text-muted);margin-bottom:5px;}
+.sc-summ{font-size:12.5px;color:var(--text-muted);line-height:1.6;margin-bottom:8px;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;}
+.sc-summ.exp{-webkit-line-clamp:unset;}
+.sc-follow{font-size:12.5px;font-weight:600;padding:8px 11px;border-radius:6px;border-left:3px solid var(--green-ind);background:var(--green-dim);color:var(--accent-emerald);line-height:1.55;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;}
+.sc-follow.exp{-webkit-line-clamp:unset;}
+.sc-expand{background:none;border:none;font-family:var(--font-mono);font-size:10.5px;font-weight:700;color:var(--accent-cyan);cursor:pointer;padding:0;margin:4px 0 8px;}
+.sc-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(370px,1fr));gap:14px;}
+mark.hl{background:#fef08a;color:#713f12;border-radius:2px;padding:0 2px;}
+@media(max-width:700px){.sc-grid{grid-template-columns:1fr;}.sc-io{grid-template-columns:1fr;}}
+
 </style>
 </head>
 <body>
@@ -1228,34 +1317,46 @@ mark.hl {
   </div>
 
   <!-- REAL CASES -->
-  <div class="tab-panel" id="tab-cases">
+    <div class="tab-panel" id="tab-cases">
   <div class="cases-wrap">
 
-    <!-- ── SEARCH & FILTER TOOLBAR ── -->
+    <!-- TOOLBAR -->
     <div class="cases-toolbar" id="cases-toolbar" style="display:none">
+
+      <!-- Search row -->
       <div class="cases-search-row">
         <div class="cases-search-wrap">
           <span class="cases-search-icon">&#128269;</span>
           <input type="text" class="cases-search-input" id="cases-search-input"
-                 placeholder="Search by case no., PS, offense, result&#8230;"
+                 placeholder="Search case no., PS, district, offense, module, summary&#8230;"
                  oninput="onCasesSearch(this.value)">
           <button class="cases-search-clear" id="cases-search-clear"
-                  onclick="clearCasesSearch()" title="Clear search">&#10005;</button>
+                  onclick="clearCasesSearch()" title="Clear">&#10005;</button>
         </div>
         <div class="cases-count-badge" id="cases-count-badge"></div>
       </div>
-      <div class="cases-filter-row">
-        <span class="filter-label">Filter:</span>
-        <button class="filter-pill active-all" data-filter="all"   onclick="setCasesFilter('all',this)">All Cases</button>
-        <button class="filter-pill"            data-filter="A"     onclick="setCasesFilter('A',this)">&#128205; Cat A — Locate &amp; Trace</button>
-        <button class="filter-pill"            data-filter="B"     onclick="setCasesFilter('B',this)">&#128270; Cat B — Identify &amp; Arrest</button>
-        <button class="filter-pill"            data-filter="C"     onclick="setCasesFilter('C',this)">&#128176; Cat C — Financial &amp; Digital</button>
-        <button class="filter-pill"            data-filter="convicted" onclick="setCasesFilter('convicted',this)">&#9878; Convicted</button>
+
+      <!-- Module filter -->
+      <div class="filter-row" id="mod-filter-row">
+        <span class="filter-label">Module:</span>
+        <button class="filter-pill fp-active" data-mod="all"   onclick="setModFilter('all',this)">All</button>
+        <button class="filter-pill" data-mod="er"    onclick="setModFilter('er',this)">ER Search</button>
+        <button class="filter-pill" data-mod="img"   onclick="setModFilter('img',this)">Image Search</button>
+        <button class="filter-pill" data-mod="qr"    onclick="setModFilter('qr',this)">QR Search</button>
+        <button class="filter-pill" data-mod="sud"   onclick="setModFilter('sud',this)">Sudarshan App</button>
+        <div class="filter-sep"></div>
         <button class="filter-reset" id="cases-filter-reset" onclick="resetCasesFilters()">&#10005; Reset</button>
       </div>
+
+      <!-- District filter -->
+      <div class="filter-row" id="dist-filter-row">
+        <span class="filter-label">District:</span>
+        <!-- populated dynamically -->
+      </div>
+
     </div>
 
-    <!-- ── DYNAMIC CONTENT ── -->
+    <!-- DYNAMIC CONTENT -->
     <div id="dynamic-cases-container">
       <div class="cases-loading">
         <div class="cases-spinner"></div>
@@ -1266,7 +1367,7 @@ mark.hl {
   </div>
   </div>
 
-  <!-- FIELD TIPS -->
+<!-- FIELD TIPS -->
   <div class="tab-panel" id="tab-tips">
   <div class="tips-wrap">
 
@@ -1906,230 +2007,253 @@ document.addEventListener('DOMContentLoaded', () => {
 
 /* ════ DYNAMIC CASES LOADER ════ */
 
-/* ═══════════════════════════════════════════════
-   CASES ENGINE — unlimited + searchable
-═══════════════════════════════════════════════ */
-const CASES_URL = 'https://raw.githubusercontent.com/aptechserv-ux/GANDIVA-Guide/main/cases.json';
+/* ══════════════════════════════════════════════════════
+   CASES ENGINE  –  natgrid_success_stories.json format
+   165 records · searchable · filterable by module & district
+══════════════════════════════════════════════════════ */
+const CASES_URL = 'https://raw.githubusercontent.com/aptechserv-ux/GANDIVA-Guide/main/natgrid_success_stories.json';
 
-const CAT_META = {
-  A: { label:'Category A — Locate & Trace',        badgeClass:'mb-a', cardClass:'cat-a', bgClass:'cat-a-bg', tag:'CAT A' },
-  B: { label:'Category B — Identify & Arrest',     badgeClass:'mb-b', cardClass:'cat-b', bgClass:'cat-b-bg', tag:'CAT B' },
-  C: { label:'Category C — Financial & Digital Trail', badgeClass:'mb-c', cardClass:'cat-c', bgClass:'cat-c-bg', tag:'CAT C' }
-};
+let _cases    = [];    // all loaded records
+let _modFilt  = 'all'; // 'all' | 'er' | 'img' | 'qr' | 'sud'
+let _distFilt = 'all'; // 'all' | district name
+let _search   = '';
+let _sTimer   = null;
 
-// ── In-memory store ──
-let _allCases     = [];
-let _catMetaMap   = {};
-let _updatedDate  = '';
-let _activeFilter = 'all';
-let _searchQuery  = '';
-let _searchTimer  = null;
-
-// ── Utilities ──
-function escHtml(str) {
-  if (!str) return '';
-  return String(str).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+/* ── utilities ── */
+function escHtml(s){
+  if(!s) return '';
+  return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+function hl(text, q){
+  if(!q) return escHtml(text);
+  const eq = q.replace(/[.*+?^${}()|[\]\\]/g,'\\$&');
+  return escHtml(text).replace(new RegExp('('+eq+')','gi'),'<mark class="hl">$1</mark>');
+}
+function normDist(d){
+  return (d||'').replace(/\(ASR\)/i,'').replace(/,\s*AP$/i,'').replace(/\s+/g,' ').trim() || 'Unknown';
 }
 
-function highlightText(text, query) {
-  if (!query) return escHtml(text);
-  const safe  = escHtml(text);
-  const safeQ = query.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-  return safe.replace(new RegExp(`(${safeQ})`, 'gi'), '<mark class="hl">$1</mark>');
+/* ── module classification ── */
+function modBucket(r){
+  const u = (r.moduleUsed||'').toUpperCase();
+  if(/SUDARSHAN|PROFILE FINDER/.test(u)) return 'sud';
+  if(/IMAGE|IMG|GANDIVA/.test(u) && !/^ER/.test(u.trim())) return 'img';
+  if(/QR|NHAI|BOI|MEA|NPR|BUREAU|MORTH|VAHAN|SARATHI/.test(u) && !/ER/.test(u)) return 'qr';
+  if(/ER|ENTITY/.test(u)) return 'er';
+  return 'oth';
+}
+function modTagHtml(modStr, srcStr, q){
+  const mods = (modStr||'').split(',').map(m=>m.trim()).filter(Boolean);
+  const srcs = (srcStr||'').split(',').map(s=>s.trim()).filter(Boolean);
+  function cls(m){
+    const u=m.toUpperCase();
+    if(/SUDARSHAN|PROFILE/.test(u)) return 'sc-mod-sud';
+    if(/IMAGE|IMG/.test(u))         return 'sc-mod-img';
+    if(/QR|NHAI|BOI|MEA|NPR|BUREAU|MORTH|VAHAN|SARATHI/.test(u)) return 'sc-mod-qr';
+    if(/ER|ENTITY/.test(u))         return 'sc-mod-er';
+    return 'sc-mod-oth';
+  }
+  const mh = mods.map(m=>`<span class="sc-mod ${cls(m)}">${hl(m,q)}</span>`).join('');
+  const sh = srcs.slice(0,3).map(s=>`<span class="sc-src">${hl(s,q)}</span>`).join('');
+  const sep= mods.length&&srcs.length?'<span class="sc-sep">|</span>':'';
+  return mh+sep+sh;
 }
 
-function matchesSearch(c, q) {
-  if (!q) return true;
-  const lower = q.toLowerCase();
-  return [c.cr_number, c.case_title, c.offense, c.what_happened, c.result]
-    .some(f => f && String(f).toLowerCase().includes(lower));
-}
+/* ── build one card ── */
+function buildCard(r, q){
+  const sid = 'sc'+r.sNo;
+  const hasId = r.natgridCaseId && !['','-','--','AP-000','AP-000xxxx','AP-0001524'].includes(r.natgridCaseId.trim());
+  const sumLong = (r.natgridSummary||'').length > 300;
+  const folLong = (r.followUp||'').length > 220;
+  const hasFol  = r.followUp && r.followUp.trim() && !['-','--'].includes(r.followUp.trim());
 
-// ── Build a single card ──
-function buildCaseCard(c, query, forceShowCat) {
-  const cat    = (c.category || 'A').toUpperCase();
-  const meta   = CAT_META[cat] || CAT_META.A;
-  const resClass = c.convicted ? 'case-result convicted' : 'case-result';
-  const resIcon  = c.convicted ? '⚖' : '✔';
-  const hl = t => highlightText(t, query);
-
-  return `<div class="case-card ${meta.cardClass}">
-    <div class="case-header">
-      <div>
-        <div class="case-cr">${hl(c.cr_number)}</div>
-        <div class="case-ps">${hl(c.case_title)}</div>
+  return `<div class="sc-card">
+    <div class="sc-head">
+      <div class="sc-top">
+        <div class="sc-fir">${hl(r.firNo||'\u2014',q)}</div>
+        ${hasId?`<span class="sc-natid">${escHtml(r.natgridCaseId)}</span>`:''}
       </div>
-      <span class="case-cat ${meta.bgClass}">${meta.tag}</span>
+      <div class="sc-loc"><strong>${hl(r.psName,q)}</strong> &middot; ${hl(normDist(r.district),q)}</div>
     </div>
-    <div class="case-offense">${hl(c.offense)}</div>
-    <div class="case-what"><strong>What happened:</strong> ${hl(c.what_happened)}</div>
-    <div class="${resClass}">${resIcon} ${hl(c.result)}</div>
+    <div class="sc-body">
+      ${r.offense?`<div class="sc-offense">${hl(r.offense,q)}</div>`:''}
+      <div class="sc-tags">${modTagHtml(r.moduleUsed,r.dataSource,q)}</div>
+      <div class="sc-io">
+        <div class="sc-io-box">
+          <div class="sc-io-lbl">&#9654; Input Given</div>
+          <div class="sc-io-val">${hl(r.inputGiven||'\u2014',q)}</div>
+        </div>
+        <div class="sc-io-box">
+          <div class="sc-io-lbl">&#10003; Output Received</div>
+          <div class="sc-io-val">${hl(r.utilizedOutput||'\u2014',q)}</div>
+        </div>
+      </div>
+      ${r.natgridSummary?`
+        <div class="sc-summ-lbl">NATGRID Summary</div>
+        <div class="sc-summ${sumLong?'':' exp'}" id="sum-${sid}">${hl(r.natgridSummary,q)}</div>
+        ${sumLong?`<button class="sc-expand" onclick="toggleCard('sum-${sid}',this)">\u25bc Show more</button>`:''}
+      `:''}
+      ${hasFol?`
+        <div class="sc-follow${folLong?'':' exp'}" id="fol-${sid}">${hl(r.followUp,q)}</div>
+        ${folLong?`<button class="sc-expand" onclick="toggleCard('fol-${sid}',this)" style="color:var(--accent-emerald)">\u25bc Show more</button>`:''}
+      `:''}
+    </div>
   </div>`;
 }
-
-// ── Build a grouped section (used when not searching) ──
-function buildSection(cat, cases, query) {
-  const meta      = CAT_META[cat] || CAT_META.A;
-  const catData   = _catMetaMap[cat];
-  const badgeHtml = catData
-    ? `<span class="mini-badge ${meta.badgeClass}" style="font-size:11px;vertical-align:middle">${escHtml(catData.badge)}</span>`
-    : '';
-  return `<div class="cases-section-wrap">
-    <div class="cases-section-title">${escHtml(meta.label)} ${badgeHtml}</div>
-    <div class="cases-grid">${cases.map(c => buildCaseCard(c, query)).join('')}</div>
-  </div>`;
+function toggleCard(id,btn){
+  const el=document.getElementById(id);
+  if(!el) return;
+  el.classList.toggle('exp');
+  btn.textContent=el.classList.contains('exp')?'\u25b2 Show less':'\u25bc Show more';
 }
 
-// ── Master render function ──
-function renderCases() {
-  const container = document.getElementById('dynamic-cases-container');
-  if (!container) return;
+/* ── apply filter ── */
+function applyFilters(){
+  const q = _search.trim();
+  let out = _cases.slice();
 
-  const q    = _searchQuery.trim();
-  const filt = _activeFilter;
+  if(_modFilt !== 'all') out = out.filter(r => modBucket(r) === _modFilt);
+  if(_distFilt !== 'all') out = out.filter(r => normDist(r.district) === _distFilt);
+  if(q) out = out.filter(r => Object.values(r).some(v=>String(v).toLowerCase().includes(q.toLowerCase())));
 
-  // Filter step 1: category / convicted
-  let filtered = _allCases.filter(c => c.active !== false);
-  if (filt === 'convicted')  filtered = filtered.filter(c => c.convicted);
-  else if (filt !== 'all')   filtered = filtered.filter(c => (c.category||'A').toUpperCase() === filt);
-
-  // Filter step 2: search query
-  const visible = filtered.filter(c => matchesSearch(c, q));
-
-  // Update count badge
   const badge = document.getElementById('cases-count-badge');
-  if (badge) {
-    const total = _allCases.filter(c => c.active !== false).length;
-    badge.innerHTML = `Showing <span>${visible.length}</span> of <span>${total}</span> case${total !== 1 ? 's' : ''}`;
-  }
+  if(badge) badge.innerHTML=`Showing <span>${out.length}</span> of <span>${_cases.length}</span>`;
 
-  // Update clear / reset button visibility
-  const clearBtn  = document.getElementById('cases-search-clear');
-  const resetBtn  = document.getElementById('cases-filter-reset');
-  if (clearBtn) clearBtn.classList.toggle('visible', q.length > 0);
-  if (resetBtn) resetBtn.classList.toggle('visible', q.length > 0 || filt !== 'all');
+  const cb=document.getElementById('cases-search-clear');
+  const rb=document.getElementById('cases-filter-reset');
+  if(cb) cb.classList.toggle('visible',q.length>0);
+  if(rb) rb.classList.toggle('visible',q.length>0||_modFilt!=='all'||_distFilt!=='all');
 
-  // ── Empty state ──
-  if (visible.length === 0) {
-    container.innerHTML = `<div class="cases-empty">
-      <div class="cases-empty-icon">&#128269;</div>
-      <h3>No cases found</h3>
-      <p>No cases match "${escHtml(q)}"${filt !== 'all' ? ` in the selected category` : ''}.<br>
-         Try a different search term or <button onclick="resetCasesFilters()" style="background:none;border:none;color:var(--saffron);font-weight:700;cursor:pointer;font-size:13px">reset filters</button>.</p>
+  return out;
+}
+
+/* ── render ── */
+function renderCases(){
+  const container=document.getElementById('dynamic-cases-container');
+  if(!container) return;
+  const q  = _search.trim();
+  const out = applyFilters();
+
+  if(!out.length){
+    container.innerHTML=`<div class="cases-empty">
+      <div class="cases-empty-icon">\uD83D\uDD0D</div>
+      <h3>No results found</h3>
+      <p>${q?`No records match "<strong>${escHtml(q)}</strong>".`:'No records in this filter.'}<br>
+      <button onclick="resetCasesFilters()" style="background:none;border:none;color:var(--saffron);font-weight:700;cursor:pointer;font-size:13px">Reset filters</button></p>
     </div>`;
     return;
   }
 
-  // ── Meta header ──
-  const metaHtml = _updatedDate
-    ? `<div class="cases-meta">
-         <span>${visible.length} case${visible.length !== 1 ? 's' : ''} shown</span>
-         <span>Last updated: ${escHtml(_updatedDate)}</span>
-       </div>`
-    : '';
-
-  // ── Grouped view (no search + filter = all or single cat) ──
-  const useGrouped = !q && (filt === 'all' || filt === 'A' || filt === 'B' || filt === 'C');
-  if (useGrouped) {
-    const groups = { A:[], B:[], C:[] };
-    visible.forEach(c => { const cat=(c.category||'A').toUpperCase(); if(groups[cat]) groups[cat].push(c); });
-    const sectionsHtml = ['A','B','C']
-      .filter(cat => groups[cat].length > 0)
-      .map(cat => buildSection(cat, groups[cat], q))
-      .join('');
-    container.innerHTML = metaHtml + sectionsHtml;
-    return;
-  }
-
-  // ── Flat view (searching or convicted filter) ──
-  const flatTitle = q
-    ? `<div class="cases-section-title">Search results for "<em>${escHtml(q)}</em>"</div>`
-    : `<div class="cases-section-title">&#9878; Convicted Cases</div>`;
-  const cards = visible.map(c => buildCaseCard(c, q)).join('');
-  container.innerHTML = `${metaHtml}${flatTitle}<div class="cases-grid">${cards}</div>`;
-}
-
-// ── Search handler (debounced 250 ms) ──
-function onCasesSearch(val) {
-  clearTimeout(_searchTimer);
-  _searchTimer = setTimeout(() => {
-    _searchQuery = val;
-    renderCases();
-  }, 250);
-}
-
-function clearCasesSearch() {
-  const inp = document.getElementById('cases-search-input');
-  if (inp) inp.value = '';
-  _searchQuery = '';
-  renderCases();
-}
-
-// ── Filter pill handler ──
-function setCasesFilter(filter, btn) {
-  _activeFilter = filter;
-  document.querySelectorAll('.filter-pill').forEach(p => {
-    p.className = 'filter-pill';          // strip all active-* classes
-  });
-  if (btn) btn.classList.add(`active-${filter}`);
-  renderCases();
-}
-
-// ── Reset everything ──
-function resetCasesFilters() {
-  _activeFilter = 'all';
-  _searchQuery  = '';
-  const inp = document.getElementById('cases-search-input');
-  if (inp) inp.value = '';
-  document.querySelectorAll('.filter-pill').forEach(p => p.className = 'filter-pill');
-  const allPill = document.querySelector('.filter-pill[data-filter="all"]');
-  if (allPill) allPill.classList.add('active-all');
-  renderCases();
-}
-
-// ── Fetch from GitHub ──
-async function fetchRealCases() {
-  const container = document.getElementById('dynamic-cases-container');
-  const toolbar   = document.getElementById('cases-toolbar');
-  if (!container) return;
-
-  container.innerHTML = `<div class="cases-loading">
-    <div class="cases-spinner"></div>
-    <div class="cases-loading-text">Loading cases from GitHub…</div>
+  const meta=`<div class="cases-meta">
+    <span>${out.length} case${out.length!==1?'s':''} shown</span>
+    <span style="font-family:var(--font-mono);font-size:10.5px">natgrid_success_stories.json</span>
   </div>`;
-  if (toolbar) toolbar.style.display = 'none';
 
-  try {
-    const res = await fetch(`${CASES_URL}?t=${Date.now()}`, {
-      cache: 'no-store', headers: { Accept: 'application/json' }
-    });
-    if (!res.ok) throw new Error(`GitHub returned HTTP ${res.status} — verify cases.json exists in the repo.`);
+  /* Group by district when no text search and no district filter */
+  if(!q && _distFilt==='all'){
+    const groups={};
+    out.forEach(r=>{const d=normDist(r.district);if(!groups[d])groups[d]=[];groups[d].push(r);});
+    const sections=Object.entries(groups)
+      .sort((a,b)=>b[1].length-a[1].length)
+      .map(([d,recs])=>{
+        const badge=`<span class="mini-badge mb-a" style="font-size:11px;vertical-align:middle">${recs.length}</span>`;
+        return `<div class="cases-section-wrap">
+          <div class="cases-section-title">\uD83D\uDCCD ${escHtml(d)} ${badge}</div>
+          <div class="sc-grid">${recs.map(r=>buildCard(r,q)).join('')}</div>
+        </div>`;
+      }).join('');
+    container.innerHTML = meta + sections;
+  } else {
+    /* Flat list with section header */
+    const titleTxt = q
+      ? `Results for &ldquo;<em>${escHtml(q)}</em>&rdquo;`
+      : _distFilt!=='all'
+        ? `\uD83D\uDCCD ${escHtml(_distFilt)}`
+        : `\uD83D\uDD0E ${_modFilt.toUpperCase()} module cases`;
+    container.innerHTML=`${meta}
+      <div class="cases-section-wrap">
+        <div class="cases-section-title">${titleTxt}</div>
+        <div class="sc-grid">${out.map(r=>buildCard(r,q)).join('')}</div>
+      </div>`;
+  }
+}
 
-    const data = await res.json();
-    if (!data.cases || !Array.isArray(data.cases))
-      throw new Error('Invalid JSON: expected a "cases" array at the top level.');
+/* ── filter handlers ── */
+function setModFilter(mod, btn){
+  _modFilt = mod;
+  document.querySelectorAll('#mod-filter-row .filter-pill').forEach(p=>{
+    p.className='filter-pill';
+  });
+  if(btn){
+    const cls = mod==='all'?'fp-active':mod==='er'?'fp-er':mod==='img'?'fp-img':mod==='qr'?'fp-qr':mod==='sud'?'fp-sud':'fp-active';
+    btn.classList.add(cls);
+  }
+  renderCases();
+}
+function setDistFilter(dist, btn){
+  _distFilt = dist;
+  document.querySelectorAll('#dist-filter-row .filter-pill').forEach(p=>{
+    p.className='filter-pill';
+  });
+  if(btn) btn.classList.add('fp-dist');
+  renderCases();
+}
+function onCasesSearch(val){clearTimeout(_sTimer);_sTimer=setTimeout(()=>{_search=val;renderCases();},250);}
+function clearCasesSearch(){const i=document.getElementById('cases-search-input');if(i)i.value='';_search='';renderCases();}
+function resetCasesFilters(){
+  _modFilt='all';_distFilt='all';_search='';
+  const i=document.getElementById('cases-search-input');if(i)i.value='';
+  document.querySelectorAll('#mod-filter-row .filter-pill').forEach(p=>p.className='filter-pill');
+  const allBtn=document.querySelector('#mod-filter-row [data-mod="all"]');
+  if(allBtn) allBtn.classList.add('fp-active');
+  buildDistrictPills();
+  renderCases();
+}
 
-    // Store everything in memory
-    _allCases    = data.cases;
-    _updatedDate = data.updated || '';
-    _catMetaMap  = {};
-    if (Array.isArray(data.categories))
-      data.categories.forEach(ct => { _catMetaMap[ct.id] = ct; });
+/* ── build district pills ── */
+function buildDistrictPills(){
+  const row=document.getElementById('dist-filter-row');
+  if(!row) return;
+  const dists=[...new Set(_cases.map(r=>normDist(r.district)))].sort();
+  const pills=dists.map(d=>{
+    const cnt=_cases.filter(r=>normDist(r.district)===d).length;
+    return `<button class="filter-pill" onclick="setDistFilter(${JSON.stringify(d)},this)">${escHtml(d)}<span style="opacity:.55;font-size:10px;margin-left:4px">${cnt}</span></button>`;
+  }).join('');
+  row.innerHTML=`<span class="filter-label">District:</span>
+    <button class="filter-pill fp-active" onclick="setDistFilter('all',this)">All</button>
+    ${pills}`;
+}
 
-    // Show toolbar and render
-    if (toolbar) toolbar.style.display = '';
+/* ── fetch ── */
+async function fetchRealCases(){
+  const container=document.getElementById('dynamic-cases-container');
+  const toolbar=document.getElementById('cases-toolbar');
+  if(!container) return;
+  container.innerHTML=`<div class="cases-loading"><div class="cases-spinner"></div><div class="cases-loading-text">Loading cases from GitHub\u2026</div></div>`;
+  if(toolbar) toolbar.style.display='none';
+  try{
+    const res=await fetch(`${CASES_URL}?t=${Date.now()}`,{cache:'no-store',headers:{Accept:'application/json'}});
+    if(!res.ok) throw new Error(`GitHub returned HTTP ${res.status} \u2014 verify natgrid_success_stories.json is in the repo.`);
+    const data=await res.json();
+    if(!Array.isArray(data)) throw new Error('Expected a JSON array in natgrid_success_stories.json.');
+    _cases=data;
+    if(toolbar){toolbar.style.display='';buildDistrictPills();}
     renderCases();
-
-  } catch (err) {
-    if (toolbar) toolbar.style.display = 'none';
-    container.innerHTML = `<div class="cases-error">
-      <div class="cases-error-icon">⚠️</div>
+  }catch(err){
+    if(toolbar) toolbar.style.display='none';
+    container.innerHTML=`<div class="cases-error">
+      <div class="cases-error-icon">\u26a0\ufe0f</div>
       <h3>Could not load cases</h3>
-      <p>${escHtml(err.message)}<br>Check your internet connection or verify
-         <code>cases.json</code> is present in the GitHub repository.</p>
-      <button class="cases-retry-btn" onclick="fetchRealCases()">↺ &nbsp; Retry</button>
+      <p>${escHtml(err.message)}</p>
+      <button class="cases-retry-btn" onclick="fetchRealCases()">\u21ba &nbsp;Retry</button>
     </div>`;
   }
+}
+
+function downloadPDF(){
+  document.querySelectorAll('.tl-body').forEach(b=>b.classList.add('open'));
+  document.querySelectorAll('.tl-header').forEach(h=>{h.classList.add('open');const c=h.querySelector('.tl-chevron');if(c)c.classList.add('open');});
+  setTimeout(()=>{window.print();},120);
 }
 
 </script>
