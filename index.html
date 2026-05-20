@@ -2190,12 +2190,18 @@ function setModFilter(mod, btn){
   }
   renderCases();
 }
+function handleDistClick(btn){
+  const dist = btn.getAttribute('data-dist') || 'all';
+  setDistFilter(dist, btn);
+}
 function setDistFilter(dist, btn){
   _distFilt = dist;
   document.querySelectorAll('#dist-filter-row .filter-pill').forEach(p=>{
     p.className='filter-pill';
   });
-  if(btn) btn.classList.add('fp-dist');
+  if(btn){
+    btn.classList.add(dist==='all' ? 'fp-active' : 'fp-dist');
+  }
   renderCases();
 }
 function onCasesSearch(val){clearTimeout(_sTimer);_sTimer=setTimeout(()=>{_search=val;renderCases();},250);}
@@ -2203,10 +2209,15 @@ function clearCasesSearch(){const i=document.getElementById('cases-search-input'
 function resetCasesFilters(){
   _modFilt='all';_distFilt='all';_search='';
   const i=document.getElementById('cases-search-input');if(i)i.value='';
+  // Reset module pills
   document.querySelectorAll('#mod-filter-row .filter-pill').forEach(p=>p.className='filter-pill');
-  const allBtn=document.querySelector('#mod-filter-row [data-mod="all"]');
-  if(allBtn) allBtn.classList.add('fp-active');
+  const allMod=document.querySelector('#mod-filter-row [data-mod="all"]');
+  if(allMod) allMod.classList.add('fp-active');
+  // Rebuild district pills (All will be pre-marked fp-active)
   buildDistrictPills();
+  // Hide reset button
+  const rb=document.getElementById('cases-filter-reset');
+  if(rb) rb.classList.remove('visible');
   renderCases();
 }
 
@@ -2217,10 +2228,10 @@ function buildDistrictPills(){
   const dists=[...new Set(_cases.map(r=>normDist(r.district)))].sort();
   const pills=dists.map(d=>{
     const cnt=_cases.filter(r=>normDist(r.district)===d).length;
-    return `<button class="filter-pill" onclick="setDistFilter(${JSON.stringify(d)},this)">${escHtml(d)}<span style="opacity:.55;font-size:10px;margin-left:4px">${cnt}</span></button>`;
+    return `<button class="filter-pill" data-dist="${escHtml(d)}" onclick="handleDistClick(this)">${escHtml(d)}<span style="opacity:.55;font-size:10px;margin-left:4px">${cnt}</span></button>`;
   }).join('');
   row.innerHTML=`<span class="filter-label">District:</span>
-    <button class="filter-pill fp-active" onclick="setDistFilter('all',this)">All</button>
+    <button class="filter-pill fp-active" data-dist="all" onclick="handleDistClick(this)">All</button>
     ${pills}`;
 }
 
