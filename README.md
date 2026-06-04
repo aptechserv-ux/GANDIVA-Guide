@@ -12,7 +12,7 @@
 2. Login screen fetches `credentials.json` from this repository
 3. The entered password is hashed (SHA-256) locally in the browser
 4. Hash is compared against the stored hash — access granted if matched and account is active
-5. Session lasts 4 hours, then auto-expires
+5. Session lasts 1 hours, then auto-expires
 
 ---
 
@@ -59,7 +59,7 @@ The HTML application file is distributed separately to officers and is NOT store
 - GitHub's full commit history provides an audit trail of all credential changes
 - Each change shows: who changed it, what was changed, and when
 - Officers are locked out for **30 minutes** after 5 consecutive failed attempts
-- Sessions expire after **4 hours** of login
+- Sessions expire after **1 hours** of login
 
 ---
 
